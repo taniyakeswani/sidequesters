@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { Code, TrendingUp } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const services = [
   {
@@ -8,14 +9,14 @@ const services = [
     title: "IT Services",
     description: "Websites, applications, chatbots, and custom digital solutions built for performance and scale.",
     buttonText: "Explore IT Services",
-    href: "#it-services",
+    href: "/services/it",
   },
   {
     icon: TrendingUp,
     title: "Digital Marketing",
     description: "Ads, design, SEO, and brand visibility strategies that drive real business growth.",
     buttonText: "Explore Marketing Services",
-    href: "#marketing-services",
+    href: "/services/marketing",
   },
 ];
 
@@ -71,12 +72,13 @@ const Services = () => {
                   <p className="text-muted-foreground leading-relaxed mb-8">
                     {service.description}
                   </p>
-                  <Button 
+                <Button 
                     variant="hero" 
                     size="lg"
                     className="group-hover:shadow-button transition-shadow"
+                    asChild
                   >
-                    {service.buttonText}
+                    <Link to={service.href}>{service.buttonText}</Link>
                   </Button>
                 </div>
               </div>
