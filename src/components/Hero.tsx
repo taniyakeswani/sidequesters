@@ -1,16 +1,14 @@
 import { Button } from "@/components/ui/button";
 import heroAbstract from "@/assets/hero-abstract.png";
+import AnimatedBackground from "@/components/AnimatedBackground";
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden gradient-hero-bg">
-      {/* Background decorative elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-pink/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-lavender/10 rounded-full blur-3xl" />
-      </div>
+    <section className="relative min-h-screen flex items-center overflow-hidden">
+      {/* Animated background with blobs and dots */}
+      <AnimatedBackground showDots={true} blobCount={3} />
 
-      <div className="container mx-auto max-w-[1440px] px-6 lg:px-12 pt-20">
+      <div className="container mx-auto max-w-[1440px] px-6 lg:px-12 pt-20 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center min-h-[calc(100vh-5rem)]">
           {/* Left Content */}
           <div className="flex flex-col justify-center space-y-8 max-w-xl">
@@ -24,7 +22,7 @@ const Hero = () => {
             </p>
 
             <div className="flex flex-wrap gap-4 pt-2">
-              <Button variant="hero" size="xl">
+              <Button variant="hero" size="xl" className="btn-gradient">
                 View Our Work
               </Button>
               <Button variant="heroOutline" size="xl">
