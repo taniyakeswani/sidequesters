@@ -57,17 +57,10 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
-        pink: {
-          DEFAULT: "hsl(var(--pink))",
-          soft: "hsl(var(--pink-soft))",
-        },
+        pink: "hsl(var(--pink))",
         lavender: "hsl(var(--lavender))",
-        lilac: "hsl(var(--lilac))",
         purple: "hsl(var(--purple))",
         magenta: "hsl(var(--magenta))",
-        "warm-white": "hsl(var(--warm-white))",
-        "blush-pink": "hsl(var(--blush-pink))",
-        "pastel-lavender": "hsl(var(--pastel-lavender))",
       },
       borderRadius: {
         lg: "var(--radius)",
