@@ -106,8 +106,7 @@ const About = () => {
                     <div className="relative bg-card rounded-2xl p-8 border border-border/30 shadow-card">
                       <p className="text-lg text-foreground leading-relaxed mb-6">
                         <span className="text-3xl font-bold text-pink leading-none">"</span>
-                        <strong>SideQuesters</strong> is a founder-led digital studio based in India, 
-                        specializing in end-to-end digital solutions that help businesses compete and win in the modern marketplace.
+                        At <strong>SideQuesters</strong>, we turn ideas into fully-fledged digital businesses. From logo creation and complete design systems to websites, apps, SEO, and social media growth—everything happens in one place. You focus on the business. We take care of the rest.
                       </p>
                       <p className="text-muted-foreground leading-relaxed">
                         From custom <span className="text-foreground font-medium">website development</span> and{" "}
