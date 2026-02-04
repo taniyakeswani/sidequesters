@@ -1,18 +1,32 @@
 import { motion } from "framer-motion";
+import { 
+  Search, 
+  Megaphone, 
+  Palette, 
+  Monitor, 
+  Smartphone, 
+  BarChart3, 
+  Lightbulb, 
+  PenTool, 
+  Target, 
+  Share2, 
+  Bot,
+  Layout
+} from "lucide-react";
 
-const floatingWords = [
-  { text: "SEO", top: "8%", left: "15%", delay: 0 },
-  { text: "Marketing", top: "15%", right: "10%", delay: 0.3 },
-  { text: "Branding", bottom: "20%", left: "8%", delay: 0.6 },
-  { text: "Web Design", top: "25%", left: "5%", delay: 0.9 },
-  { text: "Apps", bottom: "12%", right: "15%", delay: 1.2 },
-  { text: "UX/UI", top: "5%", right: "30%", delay: 0.4 },
-  { text: "Analytics", bottom: "30%", right: "5%", delay: 0.7 },
-  { text: "Strategy", top: "40%", left: "2%", delay: 1 },
-  { text: "Content", bottom: "8%", left: "25%", delay: 0.5 },
-  { text: "Ads", top: "12%", left: "35%", delay: 0.8 },
-  { text: "Social Media", bottom: "25%", right: "25%", delay: 1.1 },
-  { text: "Chatbots", top: "35%", right: "2%", delay: 0.2 },
+const floatingItems = [
+  { text: "SEO", Icon: Search, top: "8%", left: "12%", delay: 0 },
+  { text: "Marketing", Icon: Megaphone, top: "12%", right: "8%", delay: 0.3 },
+  { text: "Branding", Icon: Palette, bottom: "18%", left: "6%", delay: 0.6 },
+  { text: "Web Design", Icon: Monitor, top: "28%", left: "3%", delay: 0.9 },
+  { text: "Apps", Icon: Smartphone, bottom: "10%", right: "12%", delay: 1.2 },
+  { text: "UX/UI", Icon: Layout, top: "5%", right: "28%", delay: 0.4 },
+  { text: "Analytics", Icon: BarChart3, bottom: "28%", right: "3%", delay: 0.7 },
+  { text: "Strategy", Icon: Lightbulb, top: "42%", left: "0%", delay: 1 },
+  { text: "Content", Icon: PenTool, bottom: "6%", left: "22%", delay: 0.5 },
+  { text: "Ads", Icon: Target, top: "18%", left: "32%", delay: 0.8 },
+  { text: "Social", Icon: Share2, bottom: "22%", right: "22%", delay: 1.1 },
+  { text: "Chatbots", Icon: Bot, top: "38%", right: "0%", delay: 0.2 },
 ];
 
 const HeroAnimation = () => {
@@ -65,29 +79,32 @@ const HeroAnimation = () => {
         }}
       />
 
-      {/* Floating service words */}
-      {floatingWords.map((word, i) => (
-        <motion.span
-          key={word.text}
-          className="absolute text-xs md:text-sm font-medium text-muted-foreground/60 select-none pointer-events-none"
+      {/* Floating service items with icons */}
+      {floatingItems.map((item, i) => (
+        <motion.div
+          key={item.text}
+          className="absolute flex items-center gap-1.5 select-none pointer-events-none"
           style={{
-            top: word.top,
-            left: word.left,
-            right: word.right,
-            bottom: word.bottom,
+            top: item.top,
+            left: item.left,
+            right: item.right,
+            bottom: item.bottom,
           }}
           initial={{ opacity: 0, y: 10 }}
           animate={{
-            opacity: [0.3, 0.7, 0.3],
-            y: [-5, 5, -5],
+            opacity: [0.4, 0.8, 0.4],
+            y: [-4, 4, -4],
           }}
           transition={{
-            opacity: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: word.delay },
-            y: { duration: 5 + i * 0.3, repeat: Infinity, ease: "easeInOut", delay: word.delay },
+            opacity: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: item.delay },
+            y: { duration: 5 + i * 0.3, repeat: Infinity, ease: "easeInOut", delay: item.delay },
           }}
         >
-          {word.text}
-        </motion.span>
+          <item.Icon className="w-3.5 h-3.5 md:w-4 md:h-4 text-pink/70" />
+          <span className="text-xs md:text-sm font-medium text-muted-foreground/70">
+            {item.text}
+          </span>
+        </motion.div>
       ))}
 
       {/* Central glass card */}
