@@ -130,7 +130,7 @@ const Chatbot = () => {
         {isOpen ? (
           <X className="w-6 h-6" />
         ) : (
-          <MessageCircle className="w-6 h-6" />
+          <span className="text-2xl">👋</span>
         )}
       </button>
     </>
