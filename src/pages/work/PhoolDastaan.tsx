@@ -173,15 +173,17 @@ const PhoolDastaan = () => {
             <DialogTitle>{selectedImage?.title || "Image preview"}</DialogTitle>
             <DialogDescription>{selectedImage?.description || "Project image lightbox"}</DialogDescription>
           </VisuallyHidden>
-          <button
-            onClick={() => setSelectedImage(null)}
-            className="absolute top-4 right-4 z-50 p-2 rounded-full bg-background/80 hover:bg-background border border-border/50 transition-colors shadow-md"
-            aria-label="Close lightbox"
-          >
-            <X className="w-5 h-5 text-foreground" />
-          </button>
           {selectedImage && (
-            <div className="flex flex-col">
+            <div className="relative flex flex-col">
+              {/* Close button */}
+              <button
+                onClick={() => setSelectedImage(null)}
+                className="absolute top-3 right-3 z-[100] p-2.5 rounded-full bg-foreground text-background hover:bg-foreground/80 transition-colors shadow-lg"
+                aria-label="Close lightbox"
+              >
+                <X className="w-5 h-5" />
+              </button>
+              
               <div className="relative w-full max-h-[70vh] overflow-hidden">
                 <img
                   src={selectedImage.image}
