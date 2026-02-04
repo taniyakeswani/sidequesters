@@ -17,20 +17,20 @@ const Hero = () => {
           {/* Left Content */}
           <div className="flex flex-col justify-center space-y-8 max-w-xl">
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight text-foreground text-balance">
-              From Idea to Impact.<br />
-              <span className="gradient-text">One Click.</span>
+              Your digital<br />
+              <span className="gradient-text">unfair advantage</span>
             </h1>
             
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-md">
-              We design, build, and grow your business end-to-end. You focus on what matters—we handle everything else.
+              We help businesses build technology and grow visibility through smart IT solutions and digital marketing.
             </p>
 
             <div className="flex flex-wrap gap-4 pt-2">
               <Button variant="hero" size="xl" asChild>
-                <Link to="/contact">Start Building</Link>
+                <Link to="/work">View Our Work</Link>
               </Button>
               <Button variant="heroOutline" size="xl" asChild>
-                <Link to="/work">See Our Work</Link>
+                <Link to="/contact">Get in Touch</Link>
               </Button>
             </div>
           </div>
