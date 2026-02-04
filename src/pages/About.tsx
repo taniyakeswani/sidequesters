@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Lightbulb, Rocket, Handshake } from "lucide-react";
+import { Lightbulb, Rocket, Handshake, Code, TrendingUp, Palette, Users } from "lucide-react";
 import Navbar from "@/components/Navbar";
 
 const founders = [
@@ -29,6 +29,13 @@ const founders = [
   },
 ];
 
+const capabilities = [
+  { icon: Code, label: "Development" },
+  { icon: TrendingUp, label: "Marketing" },
+  { icon: Palette, label: "Design" },
+  { icon: Users, label: "Strategy" },
+];
+
 const About = () => {
   useEffect(() => {
     document.title = "About Us | SideQuesters - Digital Studio India";
@@ -46,7 +53,7 @@ const About = () => {
       <main className="pt-32 pb-24">
         <div className="container mx-auto max-w-[1440px] px-6 lg:px-12">
           {/* Page Title Section */}
-          <div className="text-center mb-12">
+          <div className="text-center mb-16">
             <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
               About Us
             </h1>
@@ -55,31 +62,87 @@ const About = () => {
             </p>
           </div>
 
-          {/* SEO Paragraph Section */}
-          <div className="max-w-3xl mx-auto mb-16">
-            <div className="bg-card rounded-2xl p-8 shadow-card border border-border/30 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-pink/10 via-lavender/10 to-purple/10 blur-3xl -z-10" />
-              <h2 className="text-2xl font-semibold text-foreground mb-4">
-                Who We Are
-              </h2>
-              <p className="text-muted-foreground leading-relaxed mb-4">
-                <strong className="text-foreground">SideQuesters</strong> is a founder-led digital studio based in India, 
-                specializing in end-to-end digital solutions that help businesses compete and win in the modern marketplace. 
-                From custom <strong className="text-foreground">website development</strong> and <strong className="text-foreground">mobile app creation</strong> to 
-                strategic <strong className="text-foreground">SEO optimization</strong> and high-performance <strong className="text-foreground">digital marketing campaigns</strong>, 
-                we combine technical expertise with creative strategy to deliver measurable results.
-              </p>
-              <p className="text-muted-foreground leading-relaxed mb-4">
-                Unlike traditional agencies, we operate as an extension of your team — offering transparent pricing, 
-                flexible engagement models, and direct access to the people building your product. Whether you're a startup 
-                looking to establish your digital presence or an established brand seeking to scale, we bring the same 
-                level of dedication and craftsmanship to every project.
-              </p>
-              <p className="text-muted-foreground leading-relaxed">
-                Our approach is simple: understand deeply, execute precisely, and iterate constantly. We believe that 
-                great digital products aren't just built — they're cultivated through partnership, feedback, and a 
-                relentless focus on what actually moves the needle for your business.
-              </p>
+          {/* Who We Are - New Editorial Layout */}
+          <div className="max-w-6xl mx-auto mb-24">
+            <div className="grid lg:grid-cols-5 gap-8 lg:gap-12 items-start">
+              {/* Left Column - Title & Capabilities */}
+              <div className="lg:col-span-2 lg:sticky lg:top-32">
+                <div className="space-y-8">
+                  <div>
+                    <span className="inline-block px-3 py-1 rounded-full bg-pink/10 text-pink text-sm font-medium mb-4">
+                      Our Story
+                    </span>
+                    <h2 className="text-3xl md:text-4xl font-bold text-foreground leading-tight">
+                      Who We Are
+                    </h2>
+                  </div>
+                  
+                  {/* Capability Pills */}
+                  <div className="flex flex-wrap gap-3">
+                    {capabilities.map((cap) => (
+                      <div 
+                        key={cap.label}
+                        className="flex items-center gap-2 px-4 py-2 rounded-full bg-card border border-border/50 shadow-sm"
+                      >
+                        <cap.icon className="w-4 h-4 text-pink" />
+                        <span className="text-sm font-medium text-foreground">{cap.label}</span>
+                      </div>
+                    ))}
+                  </div>
+                  
+                  {/* Decorative Element */}
+                  <div className="hidden lg:block">
+                    <div className="w-24 h-1 bg-gradient-to-r from-pink via-lavender to-purple rounded-full" />
+                  </div>
+                </div>
+              </div>
+              
+              {/* Right Column - Content */}
+              <div className="lg:col-span-3">
+                <div className="space-y-6">
+                  {/* Main Card */}
+                  <div className="relative">
+                    <div className="absolute -inset-1 bg-gradient-to-r from-pink/20 via-lavender/20 to-purple/20 rounded-3xl blur-xl opacity-50" />
+                    <div className="relative bg-card rounded-2xl p-8 border border-border/30 shadow-card">
+                      <p className="text-lg text-foreground leading-relaxed mb-6">
+                        <span className="text-3xl font-bold text-pink leading-none">"</span>
+                        <strong>SideQuesters</strong> is a founder-led digital studio based in India, 
+                        specializing in end-to-end digital solutions that help businesses compete and win in the modern marketplace.
+                      </p>
+                      <p className="text-muted-foreground leading-relaxed">
+                        From custom <span className="text-foreground font-medium">website development</span> and{" "}
+                        <span className="text-foreground font-medium">mobile app creation</span> to strategic{" "}
+                        <span className="text-foreground font-medium">SEO optimization</span> and high-performance{" "}
+                        <span className="text-foreground font-medium">digital marketing campaigns</span>, 
+                        we combine technical expertise with creative strategy to deliver measurable results.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  {/* Secondary Cards - Two Column */}
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div className="bg-gradient-to-br from-lavender/10 to-purple/10 rounded-2xl p-6 border border-border/30">
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-lavender to-purple flex items-center justify-center mb-4">
+                        <Users className="w-5 h-5 text-white" />
+                      </div>
+                      <h3 className="font-semibold text-foreground mb-2">Your Extended Team</h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed">
+                        Unlike traditional agencies, we operate as an extension of your team — offering transparent pricing and direct access to the people building your product.
+                      </p>
+                    </div>
+                    
+                    <div className="bg-gradient-to-br from-pink/10 to-primary/10 rounded-2xl p-6 border border-border/30">
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-pink to-primary flex items-center justify-center mb-4">
+                        <Rocket className="w-5 h-5 text-white" />
+                      </div>
+                      <h3 className="font-semibold text-foreground mb-2">Our Approach</h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed">
+                        Understand deeply, execute precisely, and iterate constantly. Great digital products are cultivated through partnership and focus.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
