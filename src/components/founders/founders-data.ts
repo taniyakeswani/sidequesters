@@ -1,8 +1,8 @@
 // Centralized founders data so UI/animation components stay small.
 
-import avatarAastha from "@/assets/avatar-aastha.png";
-import avatarTanya from "@/assets/avatar-tanya.png";
-import avatarAarushi from "@/assets/avatar-aarushi.png";
+import avatarAastha from "@/assets/avatar-aastha.jpg";
+import avatarTanya from "@/assets/avatar-tanya.jpg";
+import avatarAarushi from "@/assets/avatar-aarushi.jpg";
 
 export type Founder = {
   name: string;
