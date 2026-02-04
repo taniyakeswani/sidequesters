@@ -5,10 +5,12 @@ import { X } from "lucide-react";
 
 // Import assets
 import logoImage from "@/assets/projects/phool-dastaan/logo.png";
+import logo2Image from "@/assets/projects/phool-dastaan/pd-logo-2.png";
 import businessCardImage from "@/assets/projects/phool-dastaan/business-card.png";
 import catalogueImage from "@/assets/projects/phool-dastaan/catalogue.jpg";
 import websiteMockupImage from "@/assets/projects/phool-dastaan/website-mockup.jpg";
 import colorThemeImage from "@/assets/projects/phool-dastaan/color-theme.jpg";
+import letterImage from "@/assets/projects/phool-dastaan/pd-letter-2.png";
 
 interface WorkItem {
   id: string;
@@ -16,6 +18,7 @@ interface WorkItem {
   description: string;
   image: string;
   alt: string;
+  pdfLink?: string;
 }
 
 const workItems: WorkItem[] = [
@@ -25,6 +28,13 @@ const workItems: WorkItem[] = [
     description: "A handcrafted logo designed to reflect the poetic and timeless essence of Phool Dastaan.",
     image: logoImage,
     alt: "Phool Dastaan logo design featuring elegant floral motif with sage green background",
+  },
+  {
+    id: "logo-variant",
+    title: "Logo Variant",
+    description: "An alternate logo presentation with the tagline 'Made to Stay, Meant to Feel' — reinforcing the brand's emotional connection.",
+    image: logo2Image,
+    alt: "Phool Dastaan alternate logo with floral illustration and tagline on sage green background",
   },
   {
     id: "business-card",
@@ -41,11 +51,19 @@ const workItems: WorkItem[] = [
     alt: "Phool Dastaan brand color palette showcasing sage green, cream, and gold tones on elegant stationery",
   },
   {
+    id: "letter",
+    title: "Thank You Letter Card",
+    description: "A heartfelt note card featuring the quote 'Moments don't fade when they're held with care' — designed for personal touches with every order.",
+    image: letterImage,
+    alt: "Phool Dastaan thank you letter card with floral illustrations and handwritten note space",
+  },
+  {
     id: "catalogue",
     title: "Catalogue Design",
-    description: "A visually rich catalogue layout designed to showcase products with clarity.",
+    description: "A visually rich catalogue layout designed to showcase products with clarity and elegance.",
     image: catalogueImage,
     alt: "Phool Dastaan product catalogue spread with floral illustrations and elegant typography",
+    pdfLink: "/assets/projects/phool-dastaan/pd-catalogue-2.pdf",
   },
   {
     id: "website",
