@@ -5,7 +5,6 @@ import { X } from "lucide-react";
 
 // Import assets
 import logoImage from "@/assets/projects/phool-dastaan/logo.png";
-import logo2Image from "@/assets/projects/phool-dastaan/pd-logo-2.png";
 import businessCardImage from "@/assets/projects/phool-dastaan/business-card.png";
 import catalogueImage from "@/assets/projects/phool-dastaan/catalogue.jpg";
 import websiteMockupImage from "@/assets/projects/phool-dastaan/website-mockup.jpg";
@@ -28,13 +27,6 @@ const workItems: WorkItem[] = [
     description: "A handcrafted logo designed to reflect the poetic and timeless essence of Phool Dastaan.",
     image: logoImage,
     alt: "Phool Dastaan logo design featuring elegant floral motif with sage green background",
-  },
-  {
-    id: "logo-variant",
-    title: "Logo Variant",
-    description: "An alternate logo presentation with the tagline 'Made to Stay, Meant to Feel' — reinforcing the brand's emotional connection.",
-    image: logo2Image,
-    alt: "Phool Dastaan alternate logo with floral illustration and tagline on sage green background",
   },
   {
     id: "business-card",
