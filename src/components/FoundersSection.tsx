@@ -47,15 +47,15 @@ const FoundersSection = () => {
   // Segregation animation (starts after section entry)
   const segregation = useTransform(scrollYProgress, [0.20, 0.38], [0, 1]);
 
-  // Avatar cluster positions (overlapping → spread)
-  const leftAvatarX = useTransform(segregation, [0, 1], [60, -120]);
-  const rightAvatarX = useTransform(segregation, [0, 1], [-60, 120]);
-  const leftRotate = useTransform(segregation, [0, 1], [-12, 0]);
-  const rightRotate = useTransform(segregation, [0, 1], [12, 0]);
+  // Avatar cluster positions (tight cluster → spread apart with more space)
+  const leftAvatarX = useTransform(segregation, [0, 1], [80, -200]);
+  const rightAvatarX = useTransform(segregation, [0, 1], [-80, 200]);
+  const leftRotate = useTransform(segregation, [0, 1], [-15, 0]);
+  const rightRotate = useTransform(segregation, [0, 1], [15, 0]);
   
   // Center avatar stays dominant
-  const centerScale = useTransform(segregation, [0, 0.5, 1], [1.1, 1.15, 1]);
-  const sideScale = useTransform(segregation, [0, 1], [0.85, 1]);
+  const centerScale = useTransform(segregation, [0, 0.5, 1], [1.15, 1.2, 1]);
+  const sideScale = useTransform(segregation, [0, 1], [0.8, 1]);
   
   // Z-index visual (center in front during cluster)
   const centerZ = useTransform(segregation, [0, 0.5], [30, 20]);
@@ -170,9 +170,9 @@ const FoundersSection = () => {
 
         {/* Mobile: Vertical stack with scroll reveals */}
         <div className="md:hidden px-4">
-          {/* Cluster preview */}
+          {/* Cluster preview - Larger mobile avatars */}
           <motion.div
-            className="relative flex justify-center items-center h-28 mb-8"
+            className="relative flex justify-center items-center h-36 mb-8"
             style={{
               opacity: useTransform(segregation, [0, 0.4], [1, 0]),
               scale: useTransform(segregation, [0, 0.4], [1, 0.8]),
@@ -181,20 +181,20 @@ const FoundersSection = () => {
             <motion.img
               src={avatarAastha}
               alt="Aastha"
-              className="w-16 h-16 object-contain absolute"
-              style={{ left: "calc(50% - 50px)", rotate: -10, zIndex: 1 }}
+              className="w-20 h-20 object-contain absolute"
+              style={{ left: "calc(50% - 60px)", rotate: -12, zIndex: 1 }}
             />
             <motion.img
               src={avatarTanya}
               alt="Tanya"
-              className="w-20 h-20 object-contain absolute z-10"
-              style={{ left: "calc(50% - 40px)" }}
+              className="w-24 h-24 object-contain absolute z-10"
+              style={{ left: "calc(50% - 48px)" }}
             />
             <motion.img
               src={avatarAarushi}
               alt="Aarushi"
-              className="w-16 h-16 object-contain absolute"
-              style={{ left: "calc(50% + 10px)", rotate: 10, zIndex: 1 }}
+              className="w-20 h-20 object-contain absolute"
+              style={{ left: "calc(50% + 16px)", rotate: 12, zIndex: 1 }}
             />
           </motion.div>
 
@@ -246,17 +246,17 @@ const FounderCard = ({ founder, contentReveal, segregation, isCenter }: FounderC
 
   return (
     <motion.div
-      className={`flex flex-col items-center w-72 ${isCenter ? 'w-80' : ''}`}
+      className={`flex flex-col items-center ${isCenter ? 'w-80' : 'w-72'}`}
       whileHover={{ y: -4, transition: { duration: 0.2 } }}
     >
-      {/* Avatar */}
+      {/* Avatar - Larger sizes */}
       <motion.div
-        className={`relative mb-6 ${isCenter ? 'w-32 h-32' : 'w-28 h-28'}`}
+        className={`relative mb-6 ${isCenter ? 'w-44 h-44 md:w-52 md:h-52' : 'w-36 h-36 md:w-44 md:h-44'}`}
         whileHover={{ scale: 1.05 }}
         transition={{ type: "spring", stiffness: 300, damping: 20 }}
       >
         <motion.div 
-          className="absolute -inset-3 bg-gradient-to-br from-pink/20 via-lavender/20 to-purple/20 rounded-full blur-xl"
+          className="absolute -inset-4 bg-gradient-to-br from-pink/20 via-lavender/20 to-purple/20 rounded-full blur-xl"
           style={{ opacity: cardOpacity }}
         />
         <img
@@ -317,11 +317,11 @@ const FounderCard = ({ founder, contentReveal, segregation, isCenter }: FounderC
   );
 };
 
-// Mobile card
+// Mobile card - Larger avatars
 const FounderCardMobile = ({ founder }: { founder: typeof founders[0] }) => (
   <div className="flex flex-col items-center w-full max-w-xs group">
-    <div className="relative mb-4 w-24 h-24">
-      <div className="absolute -inset-2 bg-gradient-to-br from-pink/20 via-lavender/20 to-purple/20 rounded-full blur-lg opacity-60" />
+    <div className="relative mb-5 w-32 h-32">
+      <div className="absolute -inset-3 bg-gradient-to-br from-pink/20 via-lavender/20 to-purple/20 rounded-full blur-lg opacity-60" />
       <img
         src={founder.avatar}
         alt={founder.name}
@@ -349,11 +349,11 @@ const FounderCardMobile = ({ founder }: { founder: typeof founders[0] }) => (
   </div>
 );
 
-// Static fallback
+// Static fallback - Larger avatars
 const FounderCardStatic = ({ founder }: { founder: typeof founders[0] }) => (
   <div className="flex flex-col items-center">
-    <div className="relative mb-6 w-28 h-28">
-      <div className="absolute -inset-2 bg-gradient-to-br from-pink/20 via-lavender/20 to-purple/20 rounded-full blur-lg opacity-60" />
+    <div className="relative mb-6 w-40 h-40">
+      <div className="absolute -inset-3 bg-gradient-to-br from-pink/20 via-lavender/20 to-purple/20 rounded-full blur-lg opacity-60" />
       <img
         src={founder.avatar}
         alt={founder.name}
