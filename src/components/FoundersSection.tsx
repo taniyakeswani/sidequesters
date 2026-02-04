@@ -1,10 +1,10 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 
-// Avatar imports
-import avatarAastha from "@/assets/avatar-aastha.png";
-import avatarTanya from "@/assets/avatar-tanya.png";
-import avatarAarushi from "@/assets/avatar-aarushi.png";
+// Powerpuff Girls avatars
+import avatarAastha from "@/assets/avatar-aastha.png"; // Blossom
+import avatarTanya from "@/assets/avatar-tanya.png";   // Buttercup (center)
+import avatarAarushi from "@/assets/avatar-aarushi.png"; // Bubbles
 
 const founders = [
   {
@@ -12,21 +12,18 @@ const founders = [
     superpower: "Clarity over complexity",
     description: "We simplify problems before solving them.",
     avatar: avatarAastha,
-    position: "left" as const,
   },
   {
     name: "Tanya",
     superpower: "Built for scale",
     description: "Everything we ship is designed to grow with you.",
     avatar: avatarTanya,
-    position: "center" as const,
   },
   {
     name: "Aarushi",
     superpower: "Partnership mindset",
     description: "We work with clients, not just for them.",
     avatar: avatarAarushi,
-    position: "right" as const,
   },
 ];
 
@@ -39,35 +36,37 @@ const FoundersSection = () => {
     offset: ["start end", "end start"],
   });
 
-  // Animation phases based on scroll
-  const headingOpacity = useTransform(scrollYProgress, [0.15, 0.22], [0, 1]);
+  // Section entry animation (fade + upward motion)
+  const sectionOpacity = useTransform(scrollYProgress, [0.05, 0.15], [0, 1]);
+  const sectionY = useTransform(scrollYProgress, [0.05, 0.15], [24, 0]);
+
+  // Heading animations
+  const headingOpacity = useTransform(scrollYProgress, [0.12, 0.18], [0, 1]);
+  const subheadingOpacity = useTransform(scrollYProgress, [0.15, 0.22], [0, 0.7]);
+
+  // Segregation animation (starts after section entry)
+  const segregation = useTransform(scrollYProgress, [0.20, 0.38], [0, 1]);
+
+  // Avatar cluster positions (overlapping → spread)
+  const leftAvatarX = useTransform(segregation, [0, 1], [60, -120]);
+  const rightAvatarX = useTransform(segregation, [0, 1], [-60, 120]);
+  const leftRotate = useTransform(segregation, [0, 1], [-12, 0]);
+  const rightRotate = useTransform(segregation, [0, 1], [12, 0]);
   
-  // Segregation animation (starts after heading appears)
-  const segregation = useTransform(scrollYProgress, [0.22, 0.38], [0, 1]);
+  // Center avatar stays dominant
+  const centerScale = useTransform(segregation, [0, 0.5, 1], [1.1, 1.15, 1]);
+  const sideScale = useTransform(segregation, [0, 1], [0.85, 1]);
   
-  // Avatar positions during segregation
-  const leftAvatarX = useTransform(segregation, [0, 1], [0, -140]);
-  const rightAvatarX = useTransform(segregation, [0, 1], [0, 140]);
-  const centerAvatarScale = useTransform(segregation, [0, 0.5, 1], [1, 1.05, 1]);
-  
-  // Clustered state: overlapping positions
-  const leftClusterX = useTransform(segregation, [0, 1], [40, 0]);
-  const rightClusterX = useTransform(segregation, [0, 1], [-40, 0]);
-  const leftClusterRotate = useTransform(segregation, [0, 1], [-8, 0]);
-  const rightClusterRotate = useTransform(segregation, [0, 1], [8, 0]);
-  
-  // Z-index simulation through scale (center is always dominant)
-  const leftAvatarScale = useTransform(segregation, [0, 1], [0.85, 1]);
-  const rightAvatarScale = useTransform(segregation, [0, 1], [0.85, 1]);
-  
-  // Content reveal timing (staggered per founder)
-  const leftContentReveal = useTransform(scrollYProgress, [0.38, 0.48], [0, 1]);
-  const centerContentReveal = useTransform(scrollYProgress, [0.36, 0.46], [0, 1]);
-  const rightContentReveal = useTransform(scrollYProgress, [0.40, 0.50], [0, 1]);
-  
-  // Floating animation for clustered state
-  const floatY = useTransform(scrollYProgress, [0, 0.22], [0, 1]);
-  const floatAnimation = useTransform(floatY, (v) => Math.sin(v * Math.PI * 4) * 4);
+  // Z-index visual (center in front during cluster)
+  const centerZ = useTransform(segregation, [0, 0.5], [30, 20]);
+
+  // Content reveal timing (staggered per founder, after segregation)
+  const leftReveal = useTransform(scrollYProgress, [0.36, 0.50], [0, 1]);
+  const centerReveal = useTransform(scrollYProgress, [0.34, 0.48], [0, 1]);
+  const rightReveal = useTransform(scrollYProgress, [0.38, 0.52], [0, 1]);
+
+  // Subtle floating for cluster state
+  const floatPhase = useTransform(scrollYProgress, (p) => Math.sin(p * Math.PI * 8) * 3);
 
   if (prefersReducedMotion) {
     return (
@@ -76,6 +75,9 @@ const FoundersSection = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
             Meet the Founders
           </h2>
+          <p className="text-muted-foreground text-lg">
+            The minds building SideQuesters
+          </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto px-4">
           {founders.map((founder) => (
@@ -87,53 +89,60 @@ const FoundersSection = () => {
   }
 
   return (
-    <section ref={sectionRef} className="py-24 min-h-[150vh] relative">
-      <div className="sticky top-16 md:top-24 pt-8">
+    <section ref={sectionRef} className="py-24 min-h-[160vh] relative">
+      <motion.div 
+        className="sticky top-20 md:top-24"
+        style={{ opacity: sectionOpacity, y: sectionY }}
+      >
         {/* Heading - Fade in only */}
-        <motion.div
-          className="text-center mb-12 md:mb-20"
-          style={{ opacity: headingOpacity }}
-        >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
+        <motion.div className="text-center mb-16 md:mb-20">
+          <motion.h2
+            className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4"
+            style={{ opacity: headingOpacity }}
+          >
             Meet the Founders
-          </h2>
+          </motion.h2>
+          <motion.p
+            className="text-muted-foreground text-lg"
+            style={{ opacity: subheadingOpacity }}
+          >
+            The minds building SideQuesters
+          </motion.p>
         </motion.div>
 
-        {/* Avatar Cluster / Founders Grid */}
-        <div className="relative max-w-5xl mx-auto px-4">
-          {/* Desktop: Horizontal layout */}
-          <div className="hidden md:flex justify-center items-start gap-0 relative">
+        {/* Desktop: Avatar cluster → Founder cards */}
+        <div className="hidden md:block relative max-w-6xl mx-auto px-4">
+          <div className="flex justify-center items-start gap-0 relative min-h-[400px]">
             {/* Left - Aastha (Blossom) */}
             <motion.div
-              className="relative z-10"
+              className="absolute left-1/2 -translate-x-1/2"
               style={{
-                x: useTransform(
-                  [leftAvatarX, leftClusterX],
-                  ([spread, cluster]) => (spread as number) + (cluster as number)
-                ),
-                scale: leftAvatarScale,
-                rotate: leftClusterRotate,
-                y: useTransform(segregation, (s) => s < 0.1 ? floatAnimation.get() : 0),
+                x: leftAvatarX,
+                rotate: leftRotate,
+                scale: sideScale,
+                y: useTransform(segregation, (s) => s < 0.3 ? floatPhase.get() : 0),
+                zIndex: 10,
               }}
             >
               <FounderCard
                 founder={founders[0]}
-                contentReveal={leftContentReveal}
+                contentReveal={leftReveal}
                 segregation={segregation}
               />
             </motion.div>
 
             {/* Center - Tanya (Buttercup) - Dominant */}
             <motion.div
-              className="relative z-20"
+              className="absolute left-1/2 -translate-x-1/2"
               style={{
-                scale: centerAvatarScale,
-                y: useTransform(segregation, (s) => s < 0.1 ? floatAnimation.get() - 2 : 0),
+                scale: centerScale,
+                y: useTransform(segregation, (s) => s < 0.3 ? floatPhase.get() - 2 : 0),
+                zIndex: centerZ,
               }}
             >
               <FounderCard
                 founder={founders[1]}
-                contentReveal={centerContentReveal}
+                contentReveal={centerReveal}
                 segregation={segregation}
                 isCenter
               />
@@ -141,77 +150,75 @@ const FoundersSection = () => {
 
             {/* Right - Aarushi (Bubbles) */}
             <motion.div
-              className="relative z-10"
+              className="absolute left-1/2 -translate-x-1/2"
               style={{
-                x: useTransform(
-                  [rightAvatarX, rightClusterX],
-                  ([spread, cluster]) => (spread as number) + (cluster as number)
-                ),
-                scale: rightAvatarScale,
-                rotate: rightClusterRotate,
-                y: useTransform(segregation, (s) => s < 0.1 ? floatAnimation.get() + 1 : 0),
+                x: rightAvatarX,
+                rotate: rightRotate,
+                scale: sideScale,
+                y: useTransform(segregation, (s) => s < 0.3 ? floatPhase.get() + 1 : 0),
+                zIndex: 10,
               }}
             >
               <FounderCard
                 founder={founders[2]}
-                contentReveal={rightContentReveal}
+                contentReveal={rightReveal}
                 segregation={segregation}
               />
             </motion.div>
           </div>
+        </div>
 
-          {/* Mobile: Vertical stack */}
-          <div className="flex md:hidden flex-col items-center gap-8">
-            {/* Mobile cluster state */}
-            <motion.div
-              className="relative flex justify-center items-center h-32"
-              style={{
-                opacity: useTransform(segregation, [0, 0.3], [1, 0]),
-                scale: useTransform(segregation, [0, 0.3], [1, 0.8]),
-              }}
-            >
-              <motion.img
-                src={avatarAastha}
-                alt="Aastha"
-                className="w-20 h-20 rounded-full object-cover absolute border-2 border-background shadow-lg"
-                style={{ left: -20, rotate: -8 }}
-              />
-              <motion.img
-                src={avatarTanya}
-                alt="Tanya"
-                className="w-24 h-24 rounded-full object-cover absolute z-10 border-2 border-background shadow-xl"
-              />
-              <motion.img
-                src={avatarAarushi}
-                alt="Aarushi"
-                className="w-20 h-20 rounded-full object-cover absolute border-2 border-background shadow-lg"
-                style={{ right: -20, rotate: 8 }}
-              />
-            </motion.div>
+        {/* Mobile: Vertical stack with scroll reveals */}
+        <div className="md:hidden px-4">
+          {/* Cluster preview */}
+          <motion.div
+            className="relative flex justify-center items-center h-28 mb-8"
+            style={{
+              opacity: useTransform(segregation, [0, 0.4], [1, 0]),
+              scale: useTransform(segregation, [0, 0.4], [1, 0.8]),
+            }}
+          >
+            <motion.img
+              src={avatarAastha}
+              alt="Aastha"
+              className="w-16 h-16 object-contain absolute"
+              style={{ left: "calc(50% - 50px)", rotate: -10, zIndex: 1 }}
+            />
+            <motion.img
+              src={avatarTanya}
+              alt="Tanya"
+              className="w-20 h-20 object-contain absolute z-10"
+              style={{ left: "calc(50% - 40px)" }}
+            />
+            <motion.img
+              src={avatarAarushi}
+              alt="Aarushi"
+              className="w-16 h-16 object-contain absolute"
+              style={{ left: "calc(50% + 10px)", rotate: 10, zIndex: 1 }}
+            />
+          </motion.div>
 
-            {/* Mobile individual cards */}
-            {founders.map((founder, index) => (
-              <motion.div
-                key={founder.name}
-                style={{
-                  opacity: useTransform(
-                    scrollYProgress,
-                    [0.3 + index * 0.08, 0.38 + index * 0.08],
-                    [0, 1]
-                  ),
-                  y: useTransform(
-                    scrollYProgress,
-                    [0.3 + index * 0.08, 0.38 + index * 0.08],
-                    [40, 0]
-                  ),
-                }}
-              >
-                <FounderCardMobile founder={founder} />
-              </motion.div>
-            ))}
+          {/* Individual mobile cards */}
+          <div className="flex flex-col items-center gap-10">
+            {founders.map((founder, index) => {
+              const revealStart = 0.32 + index * 0.08;
+              const revealEnd = revealStart + 0.12;
+              
+              return (
+                <motion.div
+                  key={founder.name}
+                  style={{
+                    opacity: useTransform(scrollYProgress, [revealStart, revealEnd], [0, 1]),
+                    y: useTransform(scrollYProgress, [revealStart, revealEnd], [30, 0]),
+                  }}
+                >
+                  <FounderCardMobile founder={founder} />
+                </motion.div>
+              );
+            })}
           </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };
@@ -225,84 +232,100 @@ interface FounderCardProps {
 
 const FounderCard = ({ founder, contentReveal, segregation, isCenter }: FounderCardProps) => {
   // Individual content animations
-  const nameOpacity = useTransform(contentReveal, [0, 0.3], [0, 1]);
-  const superpowerProgress = useTransform(contentReveal, [0.2, 0.6], [0, 1]);
-  const superpowerClip = useTransform(superpowerProgress, (p) => `inset(0 ${100 - p * 100}% 0 0)`);
-  const descriptionOpacity = useTransform(contentReveal, [0.5, 1], [0, 1]);
-  const descriptionY = useTransform(contentReveal, [0.5, 1], [12, 0]);
+  const nameOpacity = useTransform(contentReveal, [0, 0.25], [0, 1]);
+  const nameScale = useTransform(contentReveal, [0, 0.25], [0.95, 1]);
   
-  // Card width expands after segregation
-  const cardWidth = useTransform(segregation, [0.8, 1], [120, 280]);
+  const superpowerOpacity = useTransform(contentReveal, [0.15, 0.45], [0, 1]);
+  const superpowerClip = useTransform(contentReveal, [0.15, 0.45], [0, 100]);
+  
+  const descriptionOpacity = useTransform(contentReveal, [0.4, 0.85], [0, 1]);
+  const descriptionY = useTransform(contentReveal, [0.4, 0.85], [10, 0]);
+  
+  // Card expands after segregation
+  const cardOpacity = useTransform(segregation, [0.6, 1], [0.3, 1]);
 
   return (
     <motion.div
-      className={`flex flex-col items-center ${isCenter ? 'mx-4' : 'mx-2'}`}
-      style={{ width: cardWidth }}
+      className={`flex flex-col items-center w-72 ${isCenter ? 'w-80' : ''}`}
+      whileHover={{ y: -4, transition: { duration: 0.2 } }}
     >
       {/* Avatar */}
       <motion.div
-        className={`relative mb-6 ${isCenter ? 'w-28 h-28 md:w-32 md:h-32' : 'w-24 h-24 md:w-28 md:h-28'}`}
+        className={`relative mb-6 ${isCenter ? 'w-32 h-32' : 'w-28 h-28'}`}
         whileHover={{ scale: 1.05 }}
         transition={{ type: "spring", stiffness: 300, damping: 20 }}
       >
-        <div className="absolute -inset-2 bg-gradient-to-br from-pink/30 via-lavender/30 to-purple/30 rounded-full blur-lg opacity-60" />
+        <motion.div 
+          className="absolute -inset-3 bg-gradient-to-br from-pink/20 via-lavender/20 to-purple/20 rounded-full blur-xl"
+          style={{ opacity: cardOpacity }}
+        />
         <img
           src={founder.avatar}
           alt={founder.name}
-          className="relative w-full h-full rounded-full object-cover border-4 border-background shadow-xl"
+          className="relative w-full h-full object-contain drop-shadow-lg"
         />
       </motion.div>
 
-      {/* Name - Fade in only */}
-      <motion.h3
-        className="text-xl md:text-2xl font-semibold text-foreground text-center mb-3"
-        style={{ opacity: nameOpacity }}
+      {/* Content container */}
+      <motion.div 
+        className="text-center w-full"
+        style={{ opacity: cardOpacity }}
       >
-        {founder.name}
-      </motion.h3>
+        {/* Name - Fade + scale */}
+        <motion.h3
+          className="text-xl md:text-2xl font-semibold text-foreground mb-3"
+          style={{ 
+            opacity: nameOpacity,
+            scale: nameScale,
+          }}
+        >
+          {founder.name}
+        </motion.h3>
 
-      {/* Superpower - Masked reveal */}
-      <motion.div
-        className="text-center mb-4 overflow-hidden"
-        style={{ opacity: useTransform(contentReveal, [0.2, 0.4], [0, 1]) }}
-      >
-        <div className="inline-block px-4 py-2 rounded-full bg-secondary/80 relative overflow-hidden group/badge">
-          <motion.span
-            className="text-sm block"
-            style={{ clipPath: superpowerClip }}
-          >
-            <span className="font-normal text-muted-foreground">Superpower: </span>
-            <span className="font-medium text-foreground">{founder.superpower}</span>
-          </motion.span>
-          {/* Hover underline */}
-          <span className="absolute bottom-1 left-4 right-4 h-0.5 bg-gradient-to-r from-pink via-lavender to-purple scale-x-0 group-hover/badge:scale-x-100 transition-transform duration-300 origin-left" />
-        </div>
+        {/* Superpower - Left to right reveal */}
+        <motion.div
+          className="mb-4 overflow-hidden"
+          style={{ opacity: superpowerOpacity }}
+        >
+          <div className="inline-block px-4 py-2 rounded-full bg-secondary/80 relative overflow-hidden group/badge">
+            <motion.div
+              className="text-sm"
+              style={{ 
+                clipPath: useTransform(superpowerClip, (v) => `inset(0 ${100 - v}% 0 0)`)
+              }}
+            >
+              <span className="font-normal text-muted-foreground">Superpower: </span>
+              <span className="font-medium text-foreground">{founder.superpower}</span>
+            </motion.div>
+            {/* Hover underline */}
+            <span className="absolute bottom-1 left-4 right-4 h-0.5 bg-gradient-to-r from-pink via-lavender to-purple scale-x-0 group-hover/badge:scale-x-100 transition-transform duration-300 origin-left" />
+          </div>
+        </motion.div>
+
+        {/* Description - Fade + micro upward */}
+        <motion.p
+          className="text-sm md:text-base text-muted-foreground leading-relaxed px-2"
+          style={{
+            opacity: descriptionOpacity,
+            y: descriptionY,
+          }}
+        >
+          {founder.description}
+        </motion.p>
       </motion.div>
-
-      {/* Description - Fade + micro upward motion */}
-      <motion.p
-        className="text-sm md:text-base text-muted-foreground leading-relaxed text-center max-w-[240px]"
-        style={{
-          opacity: descriptionOpacity,
-          y: descriptionY,
-        }}
-      >
-        {founder.description}
-      </motion.p>
     </motion.div>
   );
 };
 
-// Mobile card variant
+// Mobile card
 const FounderCardMobile = ({ founder }: { founder: typeof founders[0] }) => (
-  <div className="flex flex-col items-center w-full max-w-xs">
-    {/* Avatar */}
+  <div className="flex flex-col items-center w-full max-w-xs group">
     <div className="relative mb-4 w-24 h-24">
-      <div className="absolute -inset-2 bg-gradient-to-br from-pink/30 via-lavender/30 to-purple/30 rounded-full blur-lg opacity-60" />
+      <div className="absolute -inset-2 bg-gradient-to-br from-pink/20 via-lavender/20 to-purple/20 rounded-full blur-lg opacity-60" />
       <img
         src={founder.avatar}
         alt={founder.name}
-        className="relative w-full h-full rounded-full object-cover border-4 border-background shadow-xl"
+        className="relative w-full h-full object-contain drop-shadow-lg"
       />
     </div>
 
@@ -326,15 +349,15 @@ const FounderCardMobile = ({ founder }: { founder: typeof founders[0] }) => (
   </div>
 );
 
-// Static card for reduced motion
+// Static fallback
 const FounderCardStatic = ({ founder }: { founder: typeof founders[0] }) => (
   <div className="flex flex-col items-center">
     <div className="relative mb-6 w-28 h-28">
-      <div className="absolute -inset-2 bg-gradient-to-br from-pink/30 via-lavender/30 to-purple/30 rounded-full blur-lg opacity-60" />
+      <div className="absolute -inset-2 bg-gradient-to-br from-pink/20 via-lavender/20 to-purple/20 rounded-full blur-lg opacity-60" />
       <img
         src={founder.avatar}
         alt={founder.name}
-        className="relative w-full h-full rounded-full object-cover border-4 border-background shadow-xl"
+        className="relative w-full h-full object-contain drop-shadow-lg"
       />
     </div>
 
@@ -343,12 +366,11 @@ const FounderCardStatic = ({ founder }: { founder: typeof founders[0] }) => (
     </h3>
 
     <div className="text-center mb-4">
-      <div className="inline-block px-4 py-2 rounded-full bg-secondary/80 relative overflow-hidden group/badge">
+      <div className="inline-block px-4 py-2 rounded-full bg-secondary/80">
         <span className="text-sm">
           <span className="font-normal text-muted-foreground">Superpower: </span>
           <span className="font-medium text-foreground">{founder.superpower}</span>
         </span>
-        <span className="absolute bottom-1 left-4 right-4 h-0.5 bg-gradient-to-r from-pink via-lavender to-purple scale-x-0 group-hover/badge:scale-x-100 transition-transform duration-300 origin-left" />
       </div>
     </div>
 
