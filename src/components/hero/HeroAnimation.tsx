@@ -1,5 +1,20 @@
 import { motion } from "framer-motion";
 
+const floatingWords = [
+  { text: "SEO", top: "8%", left: "15%", delay: 0 },
+  { text: "Marketing", top: "15%", right: "10%", delay: 0.3 },
+  { text: "Branding", bottom: "20%", left: "8%", delay: 0.6 },
+  { text: "Web Design", top: "25%", left: "5%", delay: 0.9 },
+  { text: "Apps", bottom: "12%", right: "15%", delay: 1.2 },
+  { text: "UX/UI", top: "5%", right: "30%", delay: 0.4 },
+  { text: "Analytics", bottom: "30%", right: "5%", delay: 0.7 },
+  { text: "Strategy", top: "40%", left: "2%", delay: 1 },
+  { text: "Content", bottom: "8%", left: "25%", delay: 0.5 },
+  { text: "Ads", top: "12%", left: "35%", delay: 0.8 },
+  { text: "Social Media", bottom: "25%", right: "25%", delay: 1.1 },
+  { text: "Chatbots", top: "35%", right: "2%", delay: 0.2 },
+];
+
 const HeroAnimation = () => {
   return (
     <div className="relative w-full h-[400px] md:h-[500px] flex items-center justify-center">
@@ -49,6 +64,31 @@ const HeroAnimation = () => {
           delay: 1,
         }}
       />
+
+      {/* Floating service words */}
+      {floatingWords.map((word, i) => (
+        <motion.span
+          key={word.text}
+          className="absolute text-xs md:text-sm font-medium text-muted-foreground/60 select-none pointer-events-none"
+          style={{
+            top: word.top,
+            left: word.left,
+            right: word.right,
+            bottom: word.bottom,
+          }}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{
+            opacity: [0.3, 0.7, 0.3],
+            y: [-5, 5, -5],
+          }}
+          transition={{
+            opacity: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: word.delay },
+            y: { duration: 5 + i * 0.3, repeat: Infinity, ease: "easeInOut", delay: word.delay },
+          }}
+        >
+          {word.text}
+        </motion.span>
+      ))}
 
       {/* Central glass card */}
       <motion.div
