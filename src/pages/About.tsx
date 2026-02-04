@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { Lightbulb, Rocket, Handshake, Code, TrendingUp, Palette, Users } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Lightbulb, Rocket, Handshake, Sparkles } from "lucide-react";
 import Navbar from "@/components/Navbar";
 
 const founders = [
@@ -29,20 +29,26 @@ const founders = [
   },
 ];
 
-const capabilities = [
-  { icon: Code, label: "Development" },
-  { icon: TrendingUp, label: "Marketing" },
-  { icon: Palette, label: "Design" },
-  { icon: Users, label: "Strategy" },
+const services = [
+  "Logo Creation",
+  "Design Systems", 
+  "Websites",
+  "Apps",
+  "SEO",
+  "Social Media Growth",
 ];
 
 const About = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
   useEffect(() => {
     document.title = "About Us | SideQuesters - Digital Studio India";
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
-      metaDescription.setAttribute("content", "SideQuesters is a founder-led digital studio in India specializing in web development, mobile apps, SEO, and digital marketing. Meet our team.");
+      metaDescription.setAttribute("content", "At SideQuesters, we turn ideas into fully-fledged digital businesses. Logo, design, websites, apps, SEO, and social media growth—all in one place.");
     }
+    
+    setTimeout(() => setIsVisible(true), 100);
   }, []);
 
   return (
@@ -52,140 +58,180 @@ const About = () => {
       {/* Main Content */}
       <main className="pt-32 pb-24">
         <div className="container mx-auto max-w-[1440px] px-6 lg:px-12">
-          {/* Page Title Section */}
-          <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-              About Us
-            </h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Three minds. One mission. Building digital unfair advantages.
-            </p>
-          </div>
-
-          {/* Who We Are - New Editorial Layout */}
-          <div className="max-w-6xl mx-auto mb-24">
-            <div className="grid lg:grid-cols-5 gap-8 lg:gap-12 items-start">
-              {/* Left Column - Title & Capabilities */}
-              <div className="lg:col-span-2 lg:sticky lg:top-32">
-                <div className="space-y-8">
-                  <div>
-                    <span className="inline-block px-3 py-1 rounded-full bg-pink/10 text-pink text-sm font-medium mb-4">
-                      Our Story
-                    </span>
-                    <h2 className="text-3xl md:text-4xl font-bold text-foreground leading-tight">
-                      Who We Are
-                    </h2>
-                  </div>
-                  
-                  {/* Capability Pills */}
-                  <div className="flex flex-wrap gap-3">
-                    {capabilities.map((cap) => (
-                      <div 
-                        key={cap.label}
-                        className="flex items-center gap-2 px-4 py-2 rounded-full bg-card border border-border/50 shadow-sm"
-                      >
-                        <cap.icon className="w-4 h-4 text-pink" />
-                        <span className="text-sm font-medium text-foreground">{cap.label}</span>
-                      </div>
-                    ))}
-                  </div>
-                  
-                  {/* Decorative Element */}
-                  <div className="hidden lg:block">
-                    <div className="w-24 h-1 bg-gradient-to-r from-pink via-lavender to-purple rounded-full" />
-                  </div>
-                </div>
+          
+          {/* Hero Section - Who We Are */}
+          <section className="mb-32">
+            <div className="max-w-5xl mx-auto text-center">
+              {/* Badge */}
+              <div 
+                className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-pink/10 border border-pink/20 mb-8 transition-all duration-700 ${
+                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                }`}
+              >
+                <Sparkles className="w-4 h-4 text-pink" />
+                <span className="text-sm font-medium text-pink">About SideQuesters</span>
               </div>
               
-              {/* Right Column - Content */}
-              <div className="lg:col-span-3">
-                <div className="space-y-6">
-                  {/* Main Card */}
-                  <div className="relative">
-                    <div className="absolute -inset-1 bg-gradient-to-r from-pink/20 via-lavender/20 to-purple/20 rounded-3xl blur-xl opacity-50" />
-                    <div className="relative bg-card rounded-2xl p-8 border border-border/30 shadow-card">
-                      <p className="text-lg text-foreground leading-relaxed mb-6">
-                        <span className="text-3xl font-bold text-pink leading-none">"</span>
-                        At <strong>SideQuesters</strong>, we turn ideas into fully-fledged digital businesses. From logo creation and complete design systems to websites, apps, SEO, and social media growth—everything happens in one place. You focus on the business. We take care of the rest.
-                      </p>
-                      <p className="text-muted-foreground leading-relaxed">
-                        From custom <span className="text-foreground font-medium">website development</span> and{" "}
-                        <span className="text-foreground font-medium">mobile app creation</span> to strategic{" "}
-                        <span className="text-foreground font-medium">SEO optimization</span> and high-performance{" "}
-                        <span className="text-foreground font-medium">digital marketing campaigns</span>, 
-                        we combine technical expertise with creative strategy to deliver measurable results.
-                      </p>
-                    </div>
-                  </div>
+              {/* Main Heading */}
+              <h1 
+                className={`text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-8 leading-tight transition-all duration-700 delay-100 ${
+                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                }`}
+              >
+                We turn ideas into{" "}
+                <span className="gradient-text">digital businesses</span>
+              </h1>
+              
+              {/* Main Description */}
+              <p 
+                className={`text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8 leading-relaxed transition-all duration-700 delay-200 ${
+                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                }`}
+              >
+                At <strong className="text-foreground">SideQuesters</strong>, we turn ideas into fully-fledged digital businesses. 
+                From logo creation and complete design systems to websites, apps, SEO, and social media growth—everything happens in one place.
+              </p>
+              
+              {/* Animated Tagline */}
+              <div 
+                className={`relative inline-block transition-all duration-700 delay-300 ${
+                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                }`}
+              >
+                <div className="relative">
+                  {/* Animated Glow Background */}
+                  <div className="absolute -inset-4 bg-gradient-to-r from-pink via-lavender to-purple rounded-2xl blur-xl opacity-30 animate-pulse" />
                   
-                  {/* Secondary Cards - Two Column */}
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div className="bg-gradient-to-br from-lavender/10 to-purple/10 rounded-2xl p-6 border border-border/30">
-                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-lavender to-purple flex items-center justify-center mb-4">
-                        <Users className="w-5 h-5 text-white" />
-                      </div>
-                      <h3 className="font-semibold text-foreground mb-2">Your Extended Team</h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed">
-                        Unlike traditional agencies, we operate as an extension of your team — offering transparent pricing and direct access to the people building your product.
-                      </p>
-                    </div>
-                    
-                    <div className="bg-gradient-to-br from-pink/10 to-primary/10 rounded-2xl p-6 border border-border/30">
-                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-pink to-primary flex items-center justify-center mb-4">
-                        <Rocket className="w-5 h-5 text-white" />
-                      </div>
-                      <h3 className="font-semibold text-foreground mb-2">Our Approach</h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed">
-                        Understand deeply, execute precisely, and iterate constantly. Great digital products are cultivated through partnership and focus.
-                      </p>
-                    </div>
+                  {/* Tagline Container */}
+                  <div className="relative bg-card/80 backdrop-blur-sm border border-border/50 rounded-2xl px-8 py-6 shadow-lg">
+                    <p className="text-xl md:text-2xl font-semibold">
+                      <span className="text-muted-foreground">You focus on the business.</span>
+                      <br className="md:hidden" />
+                      <span className="relative ml-2">
+                        <span className="gradient-text animate-pulse">We take care of the rest.</span>
+                        {/* Animated Underline */}
+                        <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-pink via-lavender to-purple animate-[shimmer_2s_ease-in-out_infinite]" />
+                      </span>
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          </section>
 
-          {/* Founders Cards */}
-          <div className="text-center mb-8">
-            <h2 className="text-2xl font-semibold text-foreground">
-              Meet the Founders
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {founders.map((founder, index) => (
-              <div
-                key={founder.name}
-                className={`bg-gradient-to-br ${founder.gradient} bg-card rounded-3xl p-8 shadow-card hover:shadow-lg transition-all duration-300 border border-border/30 group`}
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                {/* Abstract Icon */}
-                <div className="flex justify-center mb-6">
-                  <div className={`w-24 h-24 rounded-2xl bg-gradient-to-br ${founder.iconGradient} flex items-center justify-center transform transition-transform duration-300 group-hover:scale-105 group-hover:rotate-3`}>
-                    <founder.icon className="w-10 h-10 text-white" />
+          {/* Services We Offer - Floating Pills */}
+          <section className="mb-32">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-center text-sm font-medium text-muted-foreground uppercase tracking-wider mb-8">
+                Everything in One Place
+              </h2>
+              <div className="flex flex-wrap justify-center gap-4">
+                {services.map((service, index) => (
+                  <div
+                    key={service}
+                    className={`group relative transition-all duration-500 ${
+                      isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                    }`}
+                    style={{ transitionDelay: `${400 + index * 100}ms` }}
+                  >
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-pink to-purple rounded-full opacity-0 group-hover:opacity-100 blur transition-opacity duration-300" />
+                    <div className="relative px-6 py-3 bg-card border border-border/50 rounded-full shadow-sm group-hover:border-transparent transition-all duration-300">
+                      <span className="text-sm font-medium text-foreground group-hover:text-foreground">
+                        {service}
+                      </span>
+                    </div>
                   </div>
-                </div>
+                ))}
+              </div>
+            </div>
+          </section>
 
-                {/* Name */}
-                <div className="text-center mb-6">
-                  <h3 className="text-2xl font-semibold text-foreground mb-3">
-                    {founder.name}
-                  </h3>
-                  
-                  {/* Superpower Badge */}
-                  <div className="inline-block px-4 py-2 rounded-full bg-secondary/80 mb-4">
-                    <span className="text-sm font-medium text-foreground">
-                      Superpower: {founder.superpower}
-                    </span>
+          {/* Value Props */}
+          <section className="mb-32">
+            <div className="max-w-5xl mx-auto">
+              <div className="grid md:grid-cols-3 gap-6">
+                <div className="bg-gradient-to-br from-pink/5 to-pink/10 rounded-3xl p-8 border border-pink/20 hover:border-pink/40 transition-all duration-300 group">
+                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-pink to-primary flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <Lightbulb className="w-6 h-6 text-white" />
                   </div>
-                  
-                  {/* Description */}
+                  <h3 className="text-xl font-semibold text-foreground mb-3">End-to-End Solutions</h3>
                   <p className="text-muted-foreground leading-relaxed">
-                    {founder.description}
+                    From concept to launch and beyond. We handle design, development, marketing, and growth—all under one roof.
+                  </p>
+                </div>
+                
+                <div className="bg-gradient-to-br from-lavender/5 to-lavender/10 rounded-3xl p-8 border border-lavender/20 hover:border-lavender/40 transition-all duration-300 group">
+                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-lavender to-purple flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <Rocket className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-foreground mb-3">Built for Growth</h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    Everything we ship is designed to scale with you. No band-aid fixes—just solid foundations for long-term success.
+                  </p>
+                </div>
+                
+                <div className="bg-gradient-to-br from-purple/5 to-purple/10 rounded-3xl p-8 border border-purple/20 hover:border-purple/40 transition-all duration-300 group">
+                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple to-magenta flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <Handshake className="w-6 h-6 text-white" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-foreground mb-3">True Partnership</h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    We work with you, not just for you. Transparent communication, fair pricing, and shared goals every step of the way.
                   </p>
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          </section>
+
+          {/* Founders Section */}
+          <section>
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-foreground mb-4">
+                Meet the Founders
+              </h2>
+              <p className="text-muted-foreground max-w-xl mx-auto">
+                Three minds. One mission. Building digital unfair advantages.
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+              {founders.map((founder, index) => (
+                <div
+                  key={founder.name}
+                  className={`bg-gradient-to-br ${founder.gradient} bg-card rounded-3xl p-8 shadow-card hover:shadow-lg transition-all duration-500 border border-border/30 group ${
+                    isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+                  }`}
+                  style={{ transitionDelay: `${800 + index * 150}ms` }}
+                >
+                  {/* Abstract Icon */}
+                  <div className="flex justify-center mb-6">
+                    <div className={`w-24 h-24 rounded-2xl bg-gradient-to-br ${founder.iconGradient} flex items-center justify-center transform transition-transform duration-300 group-hover:scale-105 group-hover:rotate-3`}>
+                      <founder.icon className="w-10 h-10 text-white" />
+                    </div>
+                  </div>
+
+                  {/* Name & Details */}
+                  <div className="text-center">
+                    <h3 className="text-2xl font-semibold text-foreground mb-3">
+                      {founder.name}
+                    </h3>
+                    
+                    {/* Superpower Badge */}
+                    <div className="inline-block px-4 py-2 rounded-full bg-secondary/80 mb-4">
+                      <span className="text-sm font-medium text-foreground">
+                        Superpower: {founder.superpower}
+                      </span>
+                    </div>
+                    
+                    {/* Description */}
+                    <p className="text-muted-foreground leading-relaxed">
+                      {founder.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
         </div>
       </main>
 
@@ -198,10 +244,10 @@ const About = () => {
             "@type": "Organization",
             name: "SideQuesters",
             url: "https://sidequesters.in",
-            description: "Founder-led digital studio in India specializing in web development, mobile apps, SEO, and digital marketing.",
+            description: "At SideQuesters, we turn ideas into fully-fledged digital businesses. Logo, design, websites, apps, SEO, and social media growth—all in one place.",
             foundingDate: "2024",
             areaServed: "India",
-            serviceType: ["Web Development", "Mobile App Development", "SEO", "Digital Marketing", "Branding"],
+            serviceType: ["Logo Design", "Design Systems", "Web Development", "Mobile App Development", "SEO", "Social Media Marketing"],
             founders: founders.map((founder) => ({
               "@type": "Person",
               name: founder.name,
@@ -209,6 +255,16 @@ const About = () => {
           }),
         }}
       />
+
+      {/* Custom Shimmer Animation */}
+      <style>{`
+        @keyframes shimmer {
+          0% { transform: scaleX(0); transform-origin: left; }
+          50% { transform: scaleX(1); transform-origin: left; }
+          50.1% { transform-origin: right; }
+          100% { transform: scaleX(0); transform-origin: right; }
+        }
+      `}</style>
     </div>
   );
 };
