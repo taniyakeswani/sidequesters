@@ -126,15 +126,15 @@ const ITServices = () => {
         </div>
       </section>
 
-      {/* Why SideQuest + CTA Section */}
+      {/* Why SideQuesters + CTA Section */}
       <section className="pb-24 px-6 lg:px-12">
         <div className="container mx-auto max-w-[1440px]">
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto items-start">
-            {/* Why SideQuest */}
+            {/* Why SideQuesters */}
             <div className="space-y-4">
               <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
                 <Sparkles className="w-5 h-5 text-pink" />
-                Why clients choose SideQuest
+                Why clients choose SideQuesters
               </h3>
               <div className="space-y-3">
                 {highlights.map((item) => (

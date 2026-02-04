@@ -18,11 +18,11 @@ const Navbar = () => {
           <Link to="/" className="flex items-center gap-2 group">
             <img 
               src={logoIcon} 
-              alt="SideQuest Logo" 
+              alt="SideQuesters Logo" 
               className="h-9 w-9 object-contain transition-transform group-hover:scale-105"
             />
             <span className="text-xl font-semibold text-foreground">
-              SideQuest
+              SideQuesters
             </span>
           </Link>
 
