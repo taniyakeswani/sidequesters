@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import heroAbstract from "@/assets/hero-abstract.png";
+import HeroAnimation from "@/components/hero/HeroAnimation";
 
 const Hero = () => {
   return (
@@ -17,36 +17,28 @@ const Hero = () => {
           {/* Left Content */}
           <div className="flex flex-col justify-center space-y-8 max-w-xl">
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight text-foreground text-balance">
-              Your digital<br />
-              <span className="gradient-text">unfair advantage</span>
+              From Idea to Impact.<br />
+              <span className="gradient-text">One Click.</span>
             </h1>
             
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-md">
-              We help businesses build technology and grow visibility through smart IT solutions and digital marketing.
+              We design, build, and grow your business end-to-end. You focus on what matters—we handle everything else.
             </p>
 
             <div className="flex flex-wrap gap-4 pt-2">
               <Button variant="hero" size="xl" asChild>
-                <Link to="/work">View Our Work</Link>
+                <Link to="/contact">Start Building</Link>
               </Button>
               <Button variant="heroOutline" size="xl" asChild>
-                <Link to="/contact">Get in Touch</Link>
+                <Link to="/work">See Our Work</Link>
               </Button>
             </div>
           </div>
 
-          {/* Right Visual */}
+          {/* Right Visual - Animated Story */}
           <div className="flex items-center justify-center lg:justify-end">
             <div className="relative w-full max-w-lg lg:max-w-xl">
-              {/* Main abstract image */}
-              <img
-                src={heroAbstract}
-                alt="Abstract 3D shapes representing digital innovation"
-                className="w-full h-auto animate-float drop-shadow-2xl"
-              />
-              
-              {/* Subtle glow behind image */}
-              <div className="absolute inset-0 -z-10 blur-3xl opacity-30 gradient-bg rounded-full scale-75" />
+              <HeroAnimation />
             </div>
           </div>
         </div>
