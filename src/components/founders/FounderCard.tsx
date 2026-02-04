@@ -90,25 +90,31 @@ export default function FounderCard({
           {founder.name}
         </motion.h3>
 
-        {/* Superpower - masked horizontal reveal */}
+        {/* Superpower - masked horizontal reveal with enhanced styling */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={showText ? { opacity: 1 } : { opacity: 0 }}
           transition={{ delay: superpowerDelay, duration: 0.1, ease: EASE_SUPERPOWER }}
           className="mb-5 overflow-hidden"
         >
-          <div className="inline-block px-4 py-2 rounded-full bg-secondary/80 relative overflow-hidden group/badge">
+          <div className="inline-block px-5 py-2.5 rounded-full bg-gradient-to-r from-pink/10 via-lavender/15 to-purple/10 border border-pink/20 relative overflow-hidden group/badge shadow-sm hover:shadow-md hover:border-pink/40 transition-all duration-300">
+            {/* Animated shimmer on hover */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/badge:translate-x-full transition-transform duration-700" />
+            
             <motion.div
               initial={{ clipPath: "inset(0 100% 0 0)" }}
               animate={showText ? { clipPath: "inset(0 0% 0 0)" } : { clipPath: "inset(0 100% 0 0)" }}
               transition={{ delay: superpowerDelay, duration: SUPERPOWER_DURATION, ease: EASE_SUPERPOWER }}
-              className="text-sm"
+              className="relative z-10"
             >
-              <span className="font-normal text-muted-foreground">Superpower: </span>
-              <span className="font-medium text-foreground">{founder.superpower}</span>
+              <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Superpower: </span>
+              <span className="text-sm md:text-base font-bold bg-gradient-to-r from-pink via-lavender to-purple bg-clip-text text-transparent">
+                {founder.superpower}
+              </span>
             </motion.div>
+            
             {/* Hover underline */}
-            <span className="absolute bottom-1 left-4 right-4 h-0.5 bg-gradient-to-r from-pink via-lavender to-purple scale-x-0 group-hover/badge:scale-x-100 transition-transform duration-300 origin-left" />
+            <span className="absolute bottom-1.5 left-5 right-5 h-0.5 bg-gradient-to-r from-pink via-lavender to-purple scale-x-0 group-hover/badge:scale-x-100 transition-transform duration-300 origin-left" />
           </div>
         </motion.div>
 
