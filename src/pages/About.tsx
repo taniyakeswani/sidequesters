@@ -1,38 +1,47 @@
-import { Check } from "lucide-react";
+import { useEffect } from "react";
+import { Lightbulb, Rocket, Handshake } from "lucide-react";
 import Navbar from "@/components/Navbar";
-import avatarAastha from "@/assets/avatar-aastha.png";
-import avatarTanya from "@/assets/avatar-tanya.png";
-import avatarAarushi from "@/assets/avatar-aarushi.png";
 
 const founders = [
   {
     name: "Aastha",
-    role: "Design & Creative",
-    avatar: avatarAastha,
-    skills: ["UI/UX Design", "Brand Design", "Visual Systems"],
+    superpower: "Clarity over complexity",
+    description: "We simplify problems before solving them.",
+    icon: Lightbulb,
     gradient: "from-pink/20 to-lavender/20",
+    iconGradient: "from-pink to-primary/80",
   },
   {
     name: "Tanya",
-    role: "Technology & Development",
-    avatar: avatarTanya,
-    skills: ["Web Development", "App Development", "Chatbots & Automation"],
+    superpower: "Built for scale",
+    description: "Everything we ship is designed to grow with you.",
+    icon: Rocket,
     gradient: "from-lavender/20 to-purple/20",
+    iconGradient: "from-lavender to-purple",
   },
   {
     name: "Aarushi",
-    role: "Marketing & Strategy",
-    avatar: avatarAarushi,
-    skills: ["Digital Marketing", "Ads & Growth Strategy", "SEO & Brand Visibility"],
+    superpower: "Partnership mindset",
+    description: "We work with clients, not just for them.",
+    icon: Handshake,
     gradient: "from-purple/20 to-magenta/20",
+    iconGradient: "from-purple to-magenta",
   },
 ];
 
 const About = () => {
+  useEffect(() => {
+    document.title = "About Us | SideQuesters";
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute("content", "Three minds. One mission. Building digital unfair advantages. Meet the founders of SideQuesters.");
+    }
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      
+
       {/* Main Content */}
       <main className="pt-32 pb-24">
         <div className="container mx-auto max-w-[1440px] px-6 lg:px-12">
@@ -48,48 +57,60 @@ const About = () => {
 
           {/* Founders Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {founders.map((founder) => (
+            {founders.map((founder, index) => (
               <div
                 key={founder.name}
-                className={`bg-gradient-to-br ${founder.gradient} bg-card rounded-3xl p-8 shadow-card hover:shadow-card-hover transition-all duration-300 border border-border/30`}
+                className={`bg-gradient-to-br ${founder.gradient} bg-card rounded-3xl p-8 shadow-card hover:shadow-lg transition-all duration-300 border border-border/30 group`}
+                style={{ animationDelay: `${index * 100}ms` }}
               >
-                {/* Avatar */}
+                {/* Abstract Icon */}
                 <div className="flex justify-center mb-6">
-                  <div className="w-32 h-32 rounded-full overflow-hidden bg-gradient-to-br from-pink/30 to-lavender/30 p-1">
-                    <img
-                      src={founder.avatar}
-                      alt={`${founder.name} avatar`}
-                      className="w-full h-full object-cover rounded-full"
-                    />
+                  <div className={`w-24 h-24 rounded-2xl bg-gradient-to-br ${founder.iconGradient} flex items-center justify-center transform transition-transform duration-300 group-hover:scale-105 group-hover:rotate-3`}>
+                    <founder.icon className="w-10 h-10 text-white" />
                   </div>
                 </div>
 
-                {/* Name & Role */}
+                {/* Name */}
                 <div className="text-center mb-6">
-                  <h3 className="text-xl font-semibold text-foreground mb-1">
+                  <h3 className="text-2xl font-semibold text-foreground mb-3">
                     {founder.name}
                   </h3>
-                  <p className="text-sm text-muted-foreground">
-                    {founder.role}
+                  
+                  {/* Superpower Badge */}
+                  <div className="inline-block px-4 py-2 rounded-full bg-secondary/80 mb-4">
+                    <span className="text-sm font-medium text-foreground">
+                      Superpower: {founder.superpower}
+                    </span>
+                  </div>
+                  
+                  {/* Description */}
+                  <p className="text-muted-foreground leading-relaxed">
+                    {founder.description}
                   </p>
                 </div>
-
-                {/* Skills */}
-                <ul className="space-y-3">
-                  {founder.skills.map((skill) => (
-                    <li key={skill} className="flex items-center gap-3">
-                      <Check className="w-4 h-4 text-pink flex-shrink-0" />
-                      <span className="text-sm text-muted-foreground">
-                        {skill}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
               </div>
             ))}
           </div>
         </div>
       </main>
+
+      {/* Schema Markup */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: "SideQuesters",
+            url: "https://sidequesters.in",
+            description: "Digital studio building digital unfair advantages through IT solutions and digital marketing.",
+            founders: founders.map((founder) => ({
+              "@type": "Person",
+              name: founder.name,
+            })),
+          }),
+        }}
+      />
     </div>
   );
 };

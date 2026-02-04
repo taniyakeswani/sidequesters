@@ -6,11 +6,9 @@ import { X } from "lucide-react";
 // Import assets
 import logoImage from "@/assets/projects/phool-dastaan/logo.png";
 import businessCardImage from "@/assets/projects/phool-dastaan/business-card.png";
-import letterImage from "@/assets/projects/phool-dastaan/letter.png";
 import catalogueImage from "@/assets/projects/phool-dastaan/catalogue.jpg";
 import websiteMockupImage from "@/assets/projects/phool-dastaan/website-mockup.jpg";
 import colorThemeImage from "@/assets/projects/phool-dastaan/color-theme.jpg";
-import customizationsImage from "@/assets/projects/phool-dastaan/customizations.jpg";
 
 interface WorkItem {
   id: string;
@@ -24,44 +22,37 @@ const workItems: WorkItem[] = [
   {
     id: "logo",
     title: "Logo Design",
-    description: "A handcrafted logo designed to reflect the poetic and timeless essence of Phool Dastaan. The mark balances elegance and simplicity, ensuring strong brand recall across print and digital platforms.",
+    description: "A handcrafted logo designed to reflect the poetic and timeless essence of Phool Dastaan.",
     image: logoImage,
     alt: "Phool Dastaan logo design featuring elegant floral motif with sage green background",
   },
   {
     id: "business-card",
     title: "Business Card",
-    description: "A minimal yet expressive business card design aligned with the brand's visual identity. Carefully considered layout and color usage create a refined first impression.",
+    description: "A minimal yet expressive business card aligned with the brand's visual identity.",
     image: businessCardImage,
     alt: "Phool Dastaan business cards on cream surface with sage green design and gold floral accents",
   },
   {
     id: "color-theme",
     title: "Brand Color Theme",
-    description: "A thoughtfully developed color palette inspired by florals and storytelling. The palette maintains visual harmony across print and digital applications.",
+    description: "A thoughtfully developed color palette inspired by florals and storytelling.",
     image: colorThemeImage,
     alt: "Phool Dastaan brand color palette showcasing sage green, cream, and gold tones on elegant stationery",
   },
   {
     id: "catalogue",
     title: "Catalogue Design",
-    description: "A visually rich catalogue layout designed to showcase products through clean layouts and storytelling-driven visuals.",
+    description: "A visually rich catalogue layout designed to showcase products with clarity.",
     image: catalogueImage,
     alt: "Phool Dastaan product catalogue spread with floral illustrations and elegant typography",
   },
   {
     id: "website",
     title: "Website Design & Development",
-    description: "A responsive website translating the brand identity into a seamless digital experience. Designed for clarity, smooth navigation, and performance across devices.",
+    description: "A responsive website translating the brand identity into a seamless digital experience.",
     image: websiteMockupImage,
     alt: "Phool Dastaan responsive website design displayed on laptop and mobile devices",
-  },
-  {
-    id: "customizations",
-    title: "Customizations",
-    description: "Bespoke visual and layout refinements crafted specifically for Phool Dastaan. Custom elements ensure consistency across brand touchpoints while preserving the project's poetic and premium identity.",
-    image: customizationsImage,
-    alt: "Custom design elements and floral patterns created for Phool Dastaan brand identity",
   },
 ];
 

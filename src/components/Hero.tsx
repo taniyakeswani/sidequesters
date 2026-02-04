@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import heroAbstract from "@/assets/hero-abstract.png";
 
@@ -6,8 +7,9 @@ const Hero = () => {
     <section className="relative min-h-screen flex items-center overflow-hidden gradient-hero-bg">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-pink/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-lavender/10 rounded-full blur-3xl" />
+        <div className="absolute top-20 left-10 w-72 h-72 bg-pink/10 rounded-full blur-3xl animate-pulse-soft" />
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-lavender/10 rounded-full blur-3xl animate-pulse-soft" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple/5 rounded-full blur-3xl" />
       </div>
 
       <div className="container mx-auto max-w-[1440px] px-6 lg:px-12 pt-20">
@@ -16,7 +18,7 @@ const Hero = () => {
           <div className="flex flex-col justify-center space-y-8 max-w-xl">
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight text-foreground text-balance">
               Your digital<br />
-              <span className="text-foreground">unfair advantage</span>
+              <span className="gradient-text">unfair advantage</span>
             </h1>
             
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-md">
@@ -24,11 +26,11 @@ const Hero = () => {
             </p>
 
             <div className="flex flex-wrap gap-4 pt-2">
-              <Button variant="hero" size="xl">
-                View Our Work
+              <Button variant="hero" size="xl" asChild>
+                <Link to="/work">View Our Work</Link>
               </Button>
-              <Button variant="heroOutline" size="xl">
-                Get in Touch
+              <Button variant="heroOutline" size="xl" asChild>
+                <Link to="/contact">Get in Touch</Link>
               </Button>
             </div>
           </div>
