@@ -1,6 +1,6 @@
 // Centralized founders data so UI/animation components stay small.
 
-import avatarAastha from "@/assets/avatar-aastha-2.jpeg";
+import avatarAastha from "@/assets/avatar-aastha.png";
 import avatarTanya from "@/assets/avatar-tanya.png";
 import avatarAarushi from "@/assets/avatar-aarushi.png";
 
