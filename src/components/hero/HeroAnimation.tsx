@@ -1,6 +1,20 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { 
+  Palette, 
+  Globe, 
+  Smartphone, 
+  Search, 
+  TrendingUp, 
+  BarChart3, 
+  Mail, 
+  Share2,
+  Megaphone,
+  PenTool,
+  Layout,
+  Zap
+} from "lucide-react";
 
 // Easing curves
 const EASE_SMOOTH = [0.22, 1, 0.36, 1] as const;
@@ -42,290 +56,355 @@ const HeroAnimation = () => {
   }
 
   return (
-    <div className="relative w-full h-full min-h-[450px] md:min-h-[550px] flex items-center justify-center">
-      {/* Background grid and connection paths */}
-      <BackgroundElements phase={phase} isMobile={isMobile} />
+    <div className="relative w-full h-full min-h-[480px] md:min-h-[580px] flex items-center justify-center">
+      {/* Background system */}
+      <BackgroundSystem phase={phase} isMobile={isMobile} />
       
-      {/* Ambient glow background */}
-      <motion.div
-        className="absolute inset-0 pointer-events-none"
-        animate={{ opacity: phase === "living" ? 0.6 : 0.3 }}
-        transition={{ duration: 1.2, ease: EASE_FLOAT }}
-      >
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] md:w-[650px] md:h-[650px] bg-gradient-radial from-pink/12 via-lavender/8 to-transparent rounded-full blur-3xl" />
-      </motion.div>
-
-      {/* Main composition container */}
-      <div className={`relative ${isMobile ? 'w-[340px] h-[400px]' : 'w-[620px] h-[520px]'}`}>
+      {/* Main composition - 70% of hero space */}
+      <div className={`relative ${isMobile ? 'w-[360px] h-[420px]' : 'w-[700px] h-[560px]'}`}>
         
         {/* Central Brand Core */}
         <BrandCore phase={phase} isMobile={isMobile} />
         
-        {/* Central Anchor Text */}
-        <CentralAnchorText phase={phase} isMobile={isMobile} />
+        {/* Primary Services - Grid aligned */}
+        <WebsiteCard phase={phase} isMobile={isMobile} />
+        <AppCard phase={phase} isMobile={isMobile} />
         
-        {/* Website Frame */}
-        <WebsiteFrame phase={phase} isMobile={isMobile} />
+        {/* Service Labels with Icons - Positioned on grid */}
+        <ServiceLabel 
+          icon={Palette} 
+          label="Branding" 
+          phase={phase} 
+          isMobile={isMobile}
+          position={isMobile ? { x: -130, y: -160 } : { x: -280, y: -200 }}
+          finalPosition={isMobile ? { x: -130, y: -140 } : { x: -260, y: -170 }}
+          delay={0}
+        />
+        <ServiceLabel 
+          icon={PenTool} 
+          label="Logo Design" 
+          phase={phase} 
+          isMobile={isMobile}
+          position={isMobile ? { x: 70, y: -165 } : { x: 150, y: -210 }}
+          finalPosition={isMobile ? { x: 75, y: -145 } : { x: 170, y: -175 }}
+          delay={0.12}
+        />
+        <ServiceLabel 
+          icon={Layout} 
+          label="UX/UI" 
+          phase={phase} 
+          isMobile={isMobile}
+          position={isMobile ? { x: -145, y: -60 } : { x: -300, y: -70 }}
+          finalPosition={isMobile ? { x: -135, y: -45 } : { x: -275, y: -50 }}
+          delay={0.24}
+        />
+        <ServiceLabel 
+          icon={Search} 
+          label="SEO" 
+          phase={phase} 
+          isMobile={isMobile}
+          position={isMobile ? { x: 115, y: -70 } : { x: 260, y: -80 }}
+          finalPosition={isMobile ? { x: 120, y: -50 } : { x: 275, y: -55 }}
+          delay={0.36}
+        />
+        <ServiceLabel 
+          icon={Megaphone} 
+          label="Marketing" 
+          phase={phase} 
+          isMobile={isMobile}
+          position={isMobile ? { x: -140, y: 50 } : { x: -290, y: 70 }}
+          finalPosition={isMobile ? { x: -130, y: 65 } : { x: -265, y: 85 }}
+          delay={0.48}
+        />
+        <ServiceLabel 
+          icon={BarChart3} 
+          label="Analytics" 
+          phase={phase} 
+          isMobile={isMobile}
+          position={isMobile ? { x: 110, y: 55 } : { x: 255, y: 75 }}
+          finalPosition={isMobile ? { x: 115, y: 70 } : { x: 265, y: 90 }}
+          delay={0.6}
+        />
+        <ServiceLabel 
+          icon={TrendingUp} 
+          label="Growth" 
+          phase={phase} 
+          isMobile={isMobile}
+          position={isMobile ? { x: -120, y: 130 } : { x: -250, y: 175 }}
+          finalPosition={isMobile ? { x: -115, y: 145 } : { x: -235, y: 190 }}
+          delay={0.72}
+        />
+        <ServiceLabel 
+          icon={Share2} 
+          label="Social" 
+          phase={phase} 
+          isMobile={isMobile}
+          position={isMobile ? { x: 100, y: 135 } : { x: 230, y: 180 }}
+          finalPosition={isMobile ? { x: 105, y: 150 } : { x: 240, y: 195 }}
+          delay={0.84}
+        />
         
-        {/* Mobile App Card */}
-        <MobileAppCard phase={phase} isMobile={isMobile} />
+        {/* Growth Chart */}
+        <GrowthChart phase={phase} isMobile={isMobile} />
         
-        {/* Logo Fragments */}
-        <LogoFragments phase={phase} isMobile={isMobile} />
+        {/* Central Tagline */}
+        <CentralTagline phase={phase} isMobile={isMobile} />
         
-        {/* SEO/Content Blocks with labels */}
-        <ContentBlocks phase={phase} isMobile={isMobile} />
-        
-        {/* Growth Metrics */}
-        <GrowthMetrics phase={phase} isMobile={isMobile} />
-        
-        {/* Social Media Tiles */}
-        <SocialTiles phase={phase} isMobile={isMobile} />
-        
-        {/* Additional service elements for density */}
-        <ServiceElements phase={phase} isMobile={isMobile} />
+        {/* Connector Lines */}
+        <ConnectorLines phase={phase} isMobile={isMobile} />
       </div>
     </div>
   );
 };
 
-// Background grid, nodes, and connection paths
-const BackgroundElements = ({ phase, isMobile }: { phase: Phase; isMobile: boolean }) => {
-  const showConnections = phase === "orchestrating" || phase === "revealed" || phase === "living";
-  const isLiving = phase === "living";
-  
-  const gridSize = isMobile ? 40 : 50;
-  const containerSize = isMobile ? 340 : 620;
+// Background grid and ambient effects
+const BackgroundSystem = ({ phase, isMobile }: { phase: Phase; isMobile: boolean }) => {
+  const showSystem = phase !== "distributed";
   
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden">
-      {/* Subtle dot grid */}
-      <svg className="absolute inset-0 w-full h-full" style={{ opacity: 0.15 }}>
+      {/* Ambient glow */}
+      <motion.div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+        animate={{ 
+          opacity: phase === "living" ? 0.7 : 0.4,
+          scale: phase === "living" ? 1.1 : 1,
+        }}
+        transition={{ duration: 1.2, ease: EASE_FLOAT }}
+      >
+        <div className={`${isMobile ? 'w-[400px] h-[400px]' : 'w-[700px] h-[700px]'} bg-gradient-radial from-pink/15 via-lavender/10 to-transparent rounded-full blur-3xl`} />
+      </motion.div>
+      
+      {/* Dot grid */}
+      <svg className="absolute inset-0 w-full h-full" style={{ opacity: 0.08 }}>
         <defs>
-          <pattern id="dotGrid" width={gridSize} height={gridSize} patternUnits="userSpaceOnUse">
-            <circle cx={gridSize/2} cy={gridSize/2} r="1" fill="hsl(var(--muted-foreground))" />
+          <pattern id="heroGrid" width={isMobile ? 30 : 40} height={isMobile ? 30 : 40} patternUnits="userSpaceOnUse">
+            <circle cx={isMobile ? 15 : 20} cy={isMobile ? 15 : 20} r="1.5" fill="hsl(var(--foreground))" />
           </pattern>
         </defs>
-        <rect width="100%" height="100%" fill="url(#dotGrid)" />
+        <rect width="100%" height="100%" fill="url(#heroGrid)" />
       </svg>
       
-      {/* Connection paths that appear during orchestration */}
-      <motion.svg
+      {/* Orbital rings */}
+      <motion.div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-        width={containerSize}
-        height={containerSize}
-        viewBox={`0 0 ${containerSize} ${containerSize}`}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: showConnections ? 0.2 : 0 }}
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ 
+          opacity: showSystem ? 0.15 : 0,
+          scale: showSystem ? 1 : 0.8,
+        }}
         transition={{ duration: 0.8, ease: EASE_SMOOTH }}
       >
-        {/* Radial connection lines from center */}
-        {[0, 45, 90, 135, 180, 225, 270, 315].map((angle, i) => {
-          const centerX = containerSize / 2;
-          const centerY = containerSize / 2;
-          const length = isMobile ? 100 : 180;
-          const endX = centerX + Math.cos((angle * Math.PI) / 180) * length;
-          const endY = centerY + Math.sin((angle * Math.PI) / 180) * length;
-          
-          return (
-            <motion.line
-              key={angle}
-              x1={centerX}
-              y1={centerY}
-              x2={endX}
-              y2={endY}
-              stroke="hsl(var(--lavender))"
-              strokeWidth="1"
-              strokeDasharray="4 4"
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: showConnections ? 1 : 0 }}
-              transition={{ duration: 0.6, delay: i * 0.05, ease: EASE_SMOOTH }}
-            />
-          );
-        })}
-        
-        {/* Orbital ring */}
-        <motion.circle
-          cx={containerSize / 2}
-          cy={containerSize / 2}
-          r={isMobile ? 120 : 200}
-          fill="none"
-          stroke="hsl(var(--border))"
-          strokeWidth="1"
-          strokeDasharray="8 8"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ 
-            opacity: showConnections ? 0.3 : 0,
-            scale: showConnections ? 1 : 0.8,
-            rotate: isLiving ? 360 : 0,
-          }}
-          transition={{ 
-            opacity: { duration: 0.6, ease: EASE_SMOOTH },
-            scale: { duration: 0.8, ease: EASE_SMOOTH },
-            rotate: { duration: 60, repeat: Infinity, ease: "linear" },
-          }}
-        />
-      </motion.svg>
-      
-      {/* Floating background nodes */}
-      {!isMobile && [
-        { x: "15%", y: "25%", delay: 0 },
-        { x: "85%", y: "30%", delay: 0.5 },
-        { x: "10%", y: "70%", delay: 1 },
-        { x: "90%", y: "65%", delay: 1.5 },
-        { x: "25%", y: "85%", delay: 2 },
-        { x: "75%", y: "80%", delay: 2.5 },
-      ].map((node, i) => (
-        <motion.div
-          key={i}
-          className="absolute w-1.5 h-1.5 rounded-full bg-lavender/30"
-          style={{ left: node.x, top: node.y }}
-          animate={{
-            y: [0, -8, 0],
-            opacity: [0.2, 0.4, 0.2],
-          }}
-          transition={{
-            duration: 4 + i * 0.3,
-            repeat: Infinity,
-            delay: node.delay,
-            ease: EASE_FLOAT,
-          }}
-        />
-      ))}
+        <div className={`${isMobile ? 'w-[280px] h-[280px]' : 'w-[480px] h-[480px]'} rounded-full border border-dashed border-lavender/30`} />
+      </motion.div>
+      <motion.div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ 
+          opacity: showSystem ? 0.1 : 0,
+          scale: showSystem ? 1 : 0.8,
+        }}
+        transition={{ duration: 0.8, delay: 0.1, ease: EASE_SMOOTH }}
+      >
+        <div className={`${isMobile ? 'w-[340px] h-[340px]' : 'w-[600px] h-[600px]'} rounded-full border border-dashed border-purple/20`} />
+      </motion.div>
     </div>
   );
 };
 
-// Floating label component
-const FloatingLabel = ({ 
-  label, 
-  position, 
-  phase, 
-  delay = 0,
-  isMobile,
-}: { 
-  label: string; 
-  position: "top" | "bottom" | "left" | "right";
-  phase: Phase;
-  delay?: number;
-  isMobile: boolean;
-}) => {
-  const showLabel = phase === "revealed" || phase === "living";
-  const isLiving = phase === "living";
+// Connector lines from center to labels
+const ConnectorLines = ({ phase, isMobile }: { phase: Phase; isMobile: boolean }) => {
+  const showLines = phase === "revealed" || phase === "living";
+  const containerSize = isMobile ? 360 : 700;
+  const center = containerSize / 2;
   
-  const positionStyles = {
-    top: "bottom-full left-1/2 -translate-x-1/2 mb-1",
-    bottom: "top-full left-1/2 -translate-x-1/2 mt-1",
-    left: "right-full top-1/2 -translate-y-1/2 mr-1.5",
-    right: "left-full top-1/2 -translate-y-1/2 ml-1.5",
-  };
+  const connections = isMobile ? [
+    { angle: -120, length: 100 },
+    { angle: -60, length: 105 },
+    { angle: -150, length: 90 },
+    { angle: -30, length: 85 },
+    { angle: 150, length: 85 },
+    { angle: 30, length: 80 },
+    { angle: 170, length: 95 },
+    { angle: 10, length: 100 },
+  ] : [
+    { angle: -125, length: 180 },
+    { angle: -55, length: 190 },
+    { angle: -160, length: 150 },
+    { angle: -20, length: 145 },
+    { angle: 155, length: 150 },
+    { angle: 25, length: 145 },
+    { angle: 170, length: 170 },
+    { angle: 10, length: 175 },
+  ];
 
   return (
-    <motion.div
-      className={`absolute ${positionStyles[position]} whitespace-nowrap`}
-      initial={{ opacity: 0, y: position === "top" ? 5 : position === "bottom" ? -5 : 0, x: position === "left" ? 5 : position === "right" ? -5 : 0 }}
-      animate={{
-        opacity: showLabel ? 0.7 : 0,
-        y: showLabel ? (isLiving ? [0, -2, 0] : 0) : (position === "top" ? 5 : position === "bottom" ? -5 : 0),
-        x: showLabel ? 0 : (position === "left" ? 5 : position === "right" ? -5 : 0),
-      }}
-      transition={{
-        opacity: { duration: 0.4, delay: delay + 0.15, ease: EASE_SMOOTH },
-        y: isLiving 
-          ? { duration: 4, repeat: Infinity, ease: EASE_FLOAT }
-          : { duration: 0.4, delay: delay + 0.15, ease: EASE_SMOOTH },
-        x: { duration: 0.4, delay: delay + 0.15, ease: EASE_SMOOTH },
-      }}
+    <svg 
+      className="absolute top-0 left-0 pointer-events-none"
+      width={containerSize}
+      height={containerSize}
+      style={{ opacity: 0.25 }}
     >
-      <span className={`${isMobile ? 'text-[7px]' : 'text-[9px]'} font-medium uppercase tracking-wider text-muted-foreground/80`}>
-        {label}
-      </span>
-    </motion.div>
+      {connections.map((conn, i) => {
+        const endX = center + Math.cos((conn.angle * Math.PI) / 180) * conn.length;
+        const endY = center + Math.sin((conn.angle * Math.PI) / 180) * conn.length;
+        
+        return (
+          <motion.line
+            key={i}
+            x1={center}
+            y1={center}
+            x2={endX}
+            y2={endY}
+            stroke="hsl(var(--lavender))"
+            strokeWidth="1"
+            strokeDasharray="4 6"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ 
+              pathLength: showLines ? 1 : 0,
+              opacity: showLines ? 1 : 0,
+            }}
+            transition={{ 
+              duration: 0.6, 
+              delay: 0.3 + i * 0.08,
+              ease: EASE_SMOOTH 
+            }}
+          />
+        );
+      })}
+    </svg>
   );
 };
 
-// Central anchor text
-const CentralAnchorText = ({ phase, isMobile }: { phase: Phase; isMobile: boolean }) => {
-  const show = phase === "revealed" || phase === "living";
+// Service label with icon
+const ServiceLabel = ({ 
+  icon: Icon, 
+  label, 
+  phase, 
+  isMobile,
+  position,
+  finalPosition,
+  delay,
+}: { 
+  icon: React.ComponentType<any>;
+  label: string;
+  phase: Phase;
+  isMobile: boolean;
+  position: { x: number; y: number };
+  finalPosition: { x: number; y: number };
+  delay: number;
+}) => {
+  const isDistributed = phase === "distributed";
   const isLiving = phase === "living";
-
+  const showLabel = phase === "revealed" || isLiving;
+  
   return (
     <motion.div
-      className="absolute top-1/2 left-1/2 z-30 pointer-events-none"
-      style={{ x: "-50%", y: isMobile ? "70px" : "90px" }}
-      initial={{ opacity: 0, y: isMobile ? 80 : 100 }}
+      className="absolute top-1/2 left-1/2 z-10"
+      initial={{ 
+        x: position.x, 
+        y: position.y, 
+        opacity: 0.5,
+        scale: 0.85,
+      }}
       animate={{
-        opacity: show ? 1 : 0,
-        y: show ? (isLiving ? [isMobile ? 70 : 90, isMobile ? 68 : 88, isMobile ? 70 : 90] : (isMobile ? 70 : 90)) : (isMobile ? 80 : 100),
+        x: isDistributed ? position.x : finalPosition.x,
+        y: isDistributed 
+          ? [position.y - 4, position.y + 4, position.y - 4]
+          : isLiving
+            ? [finalPosition.y - 3, finalPosition.y + 3, finalPosition.y - 3]
+            : finalPosition.y,
+        opacity: showLabel ? 1 : isDistributed ? 0.5 : 0.7,
+        scale: showLabel ? 1 : 0.85,
       }}
       transition={{
-        opacity: { duration: 0.6, delay: 0.4, ease: EASE_SMOOTH },
-        y: isLiving 
-          ? { duration: 4.5, repeat: Infinity, ease: EASE_FLOAT }
-          : { duration: 0.6, delay: 0.4, ease: EASE_SMOOTH },
+        x: { duration: 1, ease: EASE_SMOOTH },
+        y: (isDistributed || isLiving)
+          ? { duration: isDistributed ? 3.5 + delay : 4.5, repeat: Infinity, ease: EASE_FLOAT }
+          : { duration: 1, ease: EASE_SMOOTH },
+        opacity: { duration: 0.5, delay: showLabel ? delay + 0.15 : 0, ease: EASE_SMOOTH },
+        scale: { duration: 0.6, delay: showLabel ? delay + 0.1 : 0, ease: EASE_SMOOTH },
       }}
     >
-      <div className="text-center">
-        <motion.div
-          className={`${isMobile ? 'text-[10px]' : 'text-xs'} font-semibold uppercase tracking-[0.2em] text-foreground/60`}
-          initial={{ letterSpacing: "0.3em" }}
-          animate={{ letterSpacing: show ? "0.2em" : "0.3em" }}
-          transition={{ duration: 0.8, delay: 0.5, ease: EASE_SMOOTH }}
-        >
-          Design · Build · Scale
-        </motion.div>
-        <motion.div
-          className={`${isMobile ? 'text-[8px]' : 'text-[10px]'} text-muted-foreground/50 mt-1 tracking-wide`}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: show ? 1 : 0 }}
-          transition={{ duration: 0.5, delay: 0.7, ease: EASE_SMOOTH }}
-        >
-          End-to-End Digital Execution
-        </motion.div>
+      <div className={`
+        flex items-center gap-1.5 
+        ${isMobile ? 'px-2 py-1' : 'px-3 py-1.5'} 
+        rounded-full 
+        bg-card/95 
+        border border-border/60 
+        shadow-md
+        backdrop-blur-sm
+      `}>
+        <Icon size={isMobile ? 12 : 14} className="text-pink" />
+        <span className={`
+          ${isMobile ? 'text-[10px]' : 'text-xs'} 
+          font-semibold 
+          text-foreground
+          tracking-wide
+        `}>
+          {label}
+        </span>
       </div>
+      
+      {/* Anchor dot */}
+      <motion.div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+        style={{ 
+          x: position.x > 0 ? -((isMobile ? 40 : 50) + (label.length * (isMobile ? 4 : 5))) / 2 - 8 : ((isMobile ? 40 : 50) + (label.length * (isMobile ? 4 : 5))) / 2 + 8,
+        }}
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ 
+          scale: showLabel ? 1 : 0,
+          opacity: showLabel ? 0.6 : 0,
+        }}
+        transition={{ duration: 0.4, delay: delay + 0.2, ease: EASE_SMOOTH }}
+      >
+        <div className="w-1.5 h-1.5 rounded-full bg-lavender" />
+      </motion.div>
     </motion.div>
   );
 };
 
-// Central glowing brand nucleus
+// Central brand core - scales to 1.12x
 const BrandCore = ({ phase, isMobile }: { phase: Phase; isMobile: boolean }) => {
   const isActive = phase !== "distributed";
+  const isRevealed = phase === "revealed" || phase === "living";
   const isLiving = phase === "living";
-  const size = isMobile ? 75 : 100;
+  const size = isMobile ? 85 : 120;
 
   return (
     <motion.div
       className="absolute top-1/2 left-1/2 z-20"
       initial={{ scale: 0, opacity: 0, x: "-50%", y: "-50%" }}
       animate={{
-        scale: isActive ? (phase === "revealed" || isLiving ? 1.08 : 1) : 0,
+        scale: isActive ? (isRevealed ? 1.12 : 1) : 0,
         opacity: isActive ? 1 : 0,
         x: "-50%",
         y: isLiving ? ["-50%", "-52%", "-50%"] : "-50%",
       }}
       transition={{
-        scale: { duration: 0.8, ease: EASE_SMOOTH },
+        scale: { duration: 0.9, ease: EASE_SMOOTH },
         opacity: { duration: 0.6, ease: EASE_SMOOTH },
         y: isLiving ? { duration: 4.5, repeat: Infinity, ease: EASE_FLOAT } : { duration: 0 },
       }}
     >
-      {/* Brand Identity label */}
-      <FloatingLabel label="Brand Identity" position="top" phase={phase} delay={0.2} isMobile={isMobile} />
-      
       <div 
         className="rounded-2xl bg-gradient-to-br from-pink via-lavender to-purple shadow-2xl flex items-center justify-center relative overflow-hidden"
         style={{ width: size, height: size }}
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent" />
+        {/* Inner glow */}
+        <div className="absolute inset-0 bg-gradient-to-br from-white/25 to-transparent" />
         
+        {/* Shimmer */}
         <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/35 to-transparent"
           initial={{ x: "-100%" }}
           animate={{ x: phase === "orchestrating" ? "100%" : "-100%" }}
           transition={{ duration: 0.9, ease: EASE_SMOOTH, delay: 0.2 }}
         />
         
-        <svg viewBox="0 0 60 60" className={isMobile ? "w-9 h-9" : "w-12 h-12"}>
+        {/* Logo */}
+        <svg viewBox="0 0 60 60" className={isMobile ? "w-10 h-10" : "w-14 h-14"}>
           <motion.path
             d="M30 8L8 30L30 52L52 30L30 8Z"
             stroke="white"
@@ -344,134 +423,202 @@ const BrandCore = ({ phase, isMobile }: { phase: Phase; isMobile: boolean }) => 
             transition={{ duration: 0.5, ease: EASE_SMOOTH, delay: 0.3 }}
           />
         </svg>
+        
+        {/* Pulse ring */}
+        {isLiving && (
+          <motion.div
+            className="absolute inset-0 rounded-2xl border-2 border-white/30"
+            animate={{ 
+              scale: [1, 1.15, 1],
+              opacity: [0.5, 0, 0.5],
+            }}
+            transition={{ duration: 2.5, repeat: Infinity, ease: EASE_FLOAT }}
+          />
+        )}
       </div>
-      
-      {/* Logo Design label */}
-      <FloatingLabel label="Logo Design" position="bottom" phase={phase} delay={0.3} isMobile={isMobile} />
     </motion.div>
   );
 };
 
-// Website browser frame
-const WebsiteFrame = ({ phase, isMobile }: { phase: Phase; isMobile: boolean }) => {
+// Website card
+const WebsiteCard = ({ phase, isMobile }: { phase: Phase; isMobile: boolean }) => {
   const isDistributed = phase === "distributed";
+  const isRevealed = phase === "revealed" || phase === "living";
   const isLiving = phase === "living";
-  const showLabel = phase === "revealed" || isLiving;
   
   const distributed = isMobile 
-    ? { x: -75, y: -110, rotate: -8 }
-    : { x: -200, y: -130, rotate: -6 };
+    ? { x: -70, y: -90, rotate: -8 }
+    : { x: -170, y: -110, rotate: -6 };
   
   const final = isMobile
-    ? { x: -90, y: -30, rotate: 0 }
-    : { x: -175, y: -40, rotate: 0 };
+    ? { x: -75, y: -25, rotate: 0 }
+    : { x: -145, y: -35, rotate: 0 };
 
   return (
     <motion.div
-      className="absolute top-1/2 left-1/2 z-10"
-      initial={{ ...distributed, opacity: 0.7 }}
+      className="absolute top-1/2 left-1/2 z-15"
+      initial={{ ...distributed, opacity: 0.6 }}
       animate={{
         x: isDistributed ? distributed.x : final.x,
         y: isDistributed 
-          ? [distributed.y - 6, distributed.y + 6, distributed.y - 6]
+          ? [distributed.y - 5, distributed.y + 5, distributed.y - 5]
           : isLiving 
             ? [final.y - 4, final.y + 4, final.y - 4]
             : final.y,
         rotate: isDistributed ? distributed.rotate : final.rotate,
         opacity: 1,
-        scale: phase === "revealed" || isLiving ? 1 : 0.95,
+        scale: isRevealed ? 1.05 : 0.95,
       }}
       transition={{
         x: { duration: 1, ease: EASE_SMOOTH },
         y: (isDistributed || isLiving) 
-          ? { duration: isDistributed ? 4 : 5, repeat: Infinity, ease: EASE_FLOAT }
+          ? { duration: isDistributed ? 4 : 5.2, repeat: Infinity, ease: EASE_FLOAT }
           : { duration: 1, ease: EASE_SMOOTH },
         rotate: { duration: 1, ease: EASE_SMOOTH },
         scale: { duration: 0.8, ease: EASE_SMOOTH },
       }}
     >
-      {/* Website label */}
+      {/* Label above */}
       <motion.div
-        className="absolute -top-4 left-1/2 -translate-x-1/2 whitespace-nowrap"
-        initial={{ opacity: 0, y: 5 }}
-        animate={{ opacity: showLabel ? 0.7 : 0, y: showLabel ? 0 : 5 }}
-        transition={{ duration: 0.4, delay: 0.2, ease: EASE_SMOOTH }}
+        className={`absolute ${isMobile ? '-top-6' : '-top-7'} left-1/2 -translate-x-1/2 flex items-center gap-1 px-2 py-0.5 rounded-full bg-card/90 border border-border/50 shadow-sm`}
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: isRevealed ? 1 : 0, y: isRevealed ? 0 : 8 }}
+        transition={{ duration: 0.5, delay: 0.3, ease: EASE_SMOOTH }}
       >
-        <span className={`${isMobile ? 'text-[7px]' : 'text-[9px]'} font-medium uppercase tracking-wider text-muted-foreground/80`}>
-          Website Development
-        </span>
+        <Globe size={isMobile ? 10 : 12} className="text-lavender" />
+        <span className={`${isMobile ? 'text-[9px]' : 'text-[11px]'} font-semibold text-foreground`}>Website</span>
       </motion.div>
       
-      <div className={`${isMobile ? 'w-[120px] h-[85px]' : 'w-[165px] h-[115px]'} rounded-xl border border-border/60 bg-card/95 backdrop-blur-sm overflow-hidden shadow-xl`}>
-        <div className="flex items-center gap-1.5 px-2 py-1.5 border-b border-border/40 bg-muted/40">
+      <div className={`${isMobile ? 'w-[110px] h-[80px]' : 'w-[150px] h-[105px]'} rounded-xl border border-border/70 bg-card/95 backdrop-blur-sm overflow-hidden shadow-xl`}>
+        {/* Browser bar */}
+        <div className="flex items-center gap-1.5 px-2 py-1.5 border-b border-border/50 bg-muted/50">
           <div className="flex gap-1">
-            <div className="w-2 h-2 rounded-full bg-pink/70" />
-            <div className="w-2 h-2 rounded-full bg-lavender/70" />
-            <div className="w-2 h-2 rounded-full bg-purple/70" />
+            <div className="w-2 h-2 rounded-full bg-pink/80" />
+            <div className="w-2 h-2 rounded-full bg-lavender/80" />
+            <div className="w-2 h-2 rounded-full bg-purple/80" />
           </div>
-          <div className="flex-1 h-3 bg-muted/60 rounded-sm mx-2" />
+          <div className="flex-1 h-3 bg-muted/70 rounded-sm mx-1" />
         </div>
-        <div className="p-2 space-y-2">
-          <div className="h-4 bg-gradient-to-r from-pink/20 to-lavender/20 rounded-sm" />
-          <div className="flex gap-1.5">
-            <div className="flex-1 h-8 bg-muted/50 rounded-sm" />
-            <div className="flex-1 h-8 bg-muted/50 rounded-sm" />
-            {!isMobile && <div className="flex-1 h-8 bg-muted/50 rounded-sm" />}
+        {/* Content */}
+        <div className="p-2 space-y-1.5">
+          <div className="h-3 bg-gradient-to-r from-pink/25 to-lavender/25 rounded-sm" />
+          <div className="flex gap-1">
+            <div className="flex-1 h-6 bg-muted/60 rounded-sm" />
+            <div className="flex-1 h-6 bg-muted/60 rounded-sm" />
           </div>
-          <div className="space-y-1">
-            <div className="h-1.5 w-full bg-muted/40 rounded-sm" />
-            <div className="h-1.5 w-3/4 bg-muted/30 rounded-sm" />
-          </div>
+          <div className="h-1.5 w-3/4 bg-muted/40 rounded-sm" />
         </div>
         
+        {/* Live scroll indicator */}
         {isLiving && (
           <motion.div
-            className="absolute right-1 top-8 w-1 h-6 bg-muted/30 rounded-full overflow-hidden"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            className="absolute right-1 top-7 w-1 h-5 bg-muted/40 rounded-full overflow-hidden"
           >
             <motion.div
-              className="w-full h-2 bg-lavender/50 rounded-full"
-              animate={{ y: [0, 16, 0] }}
-              transition={{ duration: 3, repeat: Infinity, ease: EASE_FLOAT }}
+              className="w-full h-2 bg-lavender/60 rounded-full"
+              animate={{ y: [0, 12, 0] }}
+              transition={{ duration: 2.5, repeat: Infinity, ease: EASE_FLOAT }}
             />
           </motion.div>
         )}
       </div>
-      
-      {/* UX & UI label */}
-      <motion.div
-        className="absolute -bottom-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap"
-        initial={{ opacity: 0, y: -5 }}
-        animate={{ opacity: showLabel ? 0.6 : 0, y: showLabel ? 0 : -5 }}
-        transition={{ duration: 0.4, delay: 0.35, ease: EASE_SMOOTH }}
-      >
-        <span className={`${isMobile ? 'text-[6px]' : 'text-[8px]'} font-medium uppercase tracking-wider text-muted-foreground/70`}>
-          UX & UI Design
-        </span>
-      </motion.div>
     </motion.div>
   );
 };
 
-// Mobile app card
-const MobileAppCard = ({ phase, isMobile }: { phase: Phase; isMobile: boolean }) => {
+// App card
+const AppCard = ({ phase, isMobile }: { phase: Phase; isMobile: boolean }) => {
   const isDistributed = phase === "distributed";
+  const isRevealed = phase === "revealed" || phase === "living";
   const isLiving = phase === "living";
-  const showLabel = phase === "revealed" || isLiving;
   
   const distributed = isMobile
-    ? { x: 65, y: -90, rotate: 12 }
-    : { x: 175, y: -110, rotate: 10 };
+    ? { x: 60, y: -85, rotate: 10 }
+    : { x: 140, y: -100, rotate: 8 };
   
   const final = isMobile
     ? { x: 55, y: -20, rotate: 0 }
-    : { x: 115, y: -30, rotate: 0 };
+    : { x: 100, y: -30, rotate: 0 };
+
+  return (
+    <motion.div
+      className="absolute top-1/2 left-1/2 z-15"
+      initial={{ ...distributed, opacity: 0.6 }}
+      animate={{
+        x: isDistributed ? distributed.x : final.x,
+        y: isDistributed
+          ? [distributed.y + 4, distributed.y - 4, distributed.y + 4]
+          : isLiving
+            ? [final.y - 3, final.y + 3, final.y - 3]
+            : final.y,
+        rotate: isDistributed ? distributed.rotate : final.rotate,
+        opacity: 1,
+        scale: isRevealed ? 1.05 : 0.95,
+      }}
+      transition={{
+        x: { duration: 1, ease: EASE_SMOOTH },
+        y: (isDistributed || isLiving)
+          ? { duration: isDistributed ? 3.8 : 4.8, repeat: Infinity, ease: EASE_FLOAT }
+          : { duration: 1, ease: EASE_SMOOTH },
+        rotate: { duration: 1, ease: EASE_SMOOTH },
+        scale: { duration: 0.8, ease: EASE_SMOOTH },
+      }}
+    >
+      {/* Label above */}
+      <motion.div
+        className={`absolute ${isMobile ? '-top-6' : '-top-7'} left-1/2 -translate-x-1/2 flex items-center gap-1 px-2 py-0.5 rounded-full bg-card/90 border border-border/50 shadow-sm`}
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: isRevealed ? 1 : 0, y: isRevealed ? 0 : 8 }}
+        transition={{ duration: 0.5, delay: 0.35, ease: EASE_SMOOTH }}
+      >
+        <Smartphone size={isMobile ? 10 : 12} className="text-pink" />
+        <span className={`${isMobile ? 'text-[9px]' : 'text-[11px]'} font-semibold text-foreground`}>App</span>
+      </motion.div>
+      
+      <div className={`${isMobile ? 'w-[48px] h-[75px]' : 'w-[58px] h-[95px]'} rounded-xl border border-border/70 bg-card/95 backdrop-blur-sm overflow-hidden shadow-lg`}>
+        {/* Notch */}
+        <div className="flex justify-center pt-1">
+          <div className={`${isMobile ? 'w-6 h-1' : 'w-8 h-1'} bg-muted/70 rounded-full`} />
+        </div>
+        {/* Content */}
+        <div className="p-1.5 space-y-1 mt-1">
+          <div className="h-5 bg-gradient-to-br from-pink/25 to-lavender/25 rounded-md" />
+          <div className="h-1 w-full bg-muted/50 rounded-sm" />
+          <div className="h-1 w-2/3 bg-muted/40 rounded-sm" />
+          <div className="flex gap-0.5 mt-1">
+            <div className="flex-1 h-3 bg-muted/50 rounded-sm" />
+            <div className="flex-1 h-3 bg-muted/50 rounded-sm" />
+          </div>
+        </div>
+        {/* Bottom nav */}
+        <div className="absolute bottom-1 left-1 right-1 h-2 bg-muted/40 rounded-sm flex justify-around items-center">
+          {[1, 2, 3].map(i => (
+            <div key={i} className="w-1 h-1 rounded-full bg-muted-foreground/40" />
+          ))}
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+// Growth chart
+const GrowthChart = ({ phase, isMobile }: { phase: Phase; isMobile: boolean }) => {
+  const isDistributed = phase === "distributed";
+  const isRevealed = phase === "revealed" || phase === "living";
+  const isLiving = phase === "living";
+  
+  const distributed = isMobile
+    ? { x: 75, y: 75, rotate: 6 }
+    : { x: 160, y: 100, rotate: 5 };
+  
+  const final = isMobile
+    ? { x: 60, y: 55, rotate: 0 }
+    : { x: 120, y: 70, rotate: 0 };
 
   return (
     <motion.div
       className="absolute top-1/2 left-1/2 z-10"
-      initial={{ ...distributed, opacity: 0.7 }}
+      initial={{ x: distributed.x, y: distributed.y, rotate: distributed.rotate, opacity: 0.5 }}
       animate={{
         x: isDistributed ? distributed.x : final.x,
         y: isDistributed
@@ -480,578 +627,176 @@ const MobileAppCard = ({ phase, isMobile }: { phase: Phase; isMobile: boolean })
             ? [final.y - 3, final.y + 3, final.y - 3]
             : final.y,
         rotate: isDistributed ? distributed.rotate : final.rotate,
-        opacity: 1,
-        scale: phase === "revealed" || isLiving ? 1 : 0.95,
+        opacity: isRevealed ? 1 : isDistributed ? 0.5 : 0.7,
+        scale: isRevealed ? 1.05 : 0.9,
       }}
       transition={{
         x: { duration: 1, ease: EASE_SMOOTH },
         y: (isDistributed || isLiving)
-          ? { duration: isDistributed ? 3.5 : 4.8, repeat: Infinity, ease: EASE_FLOAT }
+          ? { duration: isDistributed ? 4.2 : 5, repeat: Infinity, ease: EASE_FLOAT }
           : { duration: 1, ease: EASE_SMOOTH },
         rotate: { duration: 1, ease: EASE_SMOOTH },
-        scale: { duration: 0.8, ease: EASE_SMOOTH },
-      }}
-    >
-      {/* App label */}
-      <motion.div
-        className="absolute -top-4 left-1/2 -translate-x-1/2 whitespace-nowrap"
-        initial={{ opacity: 0, y: 5 }}
-        animate={{ opacity: showLabel ? 0.7 : 0, y: showLabel ? 0 : 5 }}
-        transition={{ duration: 0.4, delay: 0.25, ease: EASE_SMOOTH }}
-      >
-        <span className={`${isMobile ? 'text-[7px]' : 'text-[9px]'} font-medium uppercase tracking-wider text-muted-foreground/80`}>
-          App Development
-        </span>
-      </motion.div>
-      
-      <div className={`${isMobile ? 'w-[50px] h-[80px]' : 'w-[60px] h-[100px]'} rounded-xl border border-border/60 bg-card/95 backdrop-blur-sm overflow-hidden shadow-lg`}>
-        <div className="flex justify-center pt-1">
-          <div className={`${isMobile ? 'w-7 h-1' : 'w-8 h-1.5'} bg-muted/60 rounded-full`} />
-        </div>
-        <div className="p-1.5 space-y-1.5 mt-1">
-          <div className="h-5 bg-gradient-to-br from-pink/25 to-lavender/25 rounded-md" />
-          <div className="h-1 w-full bg-muted/40 rounded-sm" />
-          <div className="h-1 w-2/3 bg-muted/30 rounded-sm" />
-          <div className="flex gap-1 mt-1">
-            <div className="flex-1 h-3 bg-muted/40 rounded-sm" />
-            <div className="flex-1 h-3 bg-muted/40 rounded-sm" />
-          </div>
-        </div>
-        <div className="absolute bottom-1 left-1 right-1 h-2.5 bg-muted/30 rounded-sm flex justify-around items-center px-1">
-          {[1, 2, 3].map(i => (
-            <div key={i} className="w-1.5 h-1.5 rounded-full bg-muted/60" />
-          ))}
-        </div>
-      </div>
-    </motion.div>
-  );
-};
-
-// Logo fragments that assemble
-const LogoFragments = ({ phase, isMobile }: { phase: Phase; isMobile: boolean }) => {
-  const isDistributed = phase === "distributed";
-  const isActive = phase !== "distributed";
-  
-  const fragments = [
-    { 
-      distributed: isMobile ? { x: -35, y: -140 } : { x: -50, y: -190 },
-      final: { x: 0, y: 0 },
-      delay: 0,
-    },
-    { 
-      distributed: isMobile ? { x: 55, y: -135 } : { x: 90, y: -175 },
-      final: { x: 0, y: 0 },
-      delay: 0.1,
-    },
-  ];
-
-  return (
-    <>
-      {fragments.map((frag, i) => (
-        <motion.div
-          key={i}
-          className="absolute top-1/2 left-1/2 z-5"
-          initial={{ 
-            x: frag.distributed.x, 
-            y: frag.distributed.y, 
-            opacity: 0.6,
-            rotate: i === 0 ? -15 : 20,
-          }}
-          animate={{
-            x: isDistributed ? frag.distributed.x : frag.final.x,
-            y: isDistributed
-              ? [frag.distributed.y - 4, frag.distributed.y + 4, frag.distributed.y - 4]
-              : frag.final.y,
-            opacity: isActive ? 0 : 0.6,
-            rotate: isDistributed ? (i === 0 ? -15 : 20) : 0,
-            scale: isDistributed ? 1 : 0,
-          }}
-          transition={{
-            x: { duration: 0.8, ease: EASE_SMOOTH, delay: frag.delay },
-            y: isDistributed
-              ? { duration: 4.2, repeat: Infinity, ease: EASE_FLOAT }
-              : { duration: 0.8, ease: EASE_SMOOTH, delay: frag.delay },
-            opacity: { duration: 0.5, ease: EASE_SMOOTH, delay: frag.delay },
-            rotate: { duration: 0.8, ease: EASE_SMOOTH, delay: frag.delay },
-            scale: { duration: 0.6, ease: EASE_SMOOTH, delay: frag.delay },
-          }}
-        >
-          <div className={`${isMobile ? 'w-7 h-7' : 'w-9 h-9'} rounded-lg bg-gradient-to-br from-pink/60 to-lavender/60 flex items-center justify-center`}>
-            <div className={`${isMobile ? 'w-3 h-3' : 'w-4 h-4'} border-2 border-white/70 rounded-sm rotate-45`} />
-          </div>
-        </motion.div>
-      ))}
-    </>
-  );
-};
-
-// SEO/Content blocks with labels
-const ContentBlocks = ({ phase, isMobile }: { phase: Phase; isMobile: boolean }) => {
-  const isDistributed = phase === "distributed";
-  const isLiving = phase === "living";
-  const showFinal = phase === "revealed" || isLiving;
-  
-  const blocks = [
-    { 
-      label: "SEO",
-      fullLabel: "Search Optimization",
-      distributed: isMobile ? { x: -105, y: 50 } : { x: -240, y: 70 },
-      final: isMobile ? { x: -105, y: 80 } : { x: -220, y: 95 },
-      floatDelay: 0,
-    },
-    { 
-      label: "CONTENT",
-      fullLabel: "Content Strategy",
-      distributed: isMobile ? { x: 95, y: 70 } : { x: 225, y: 55 },
-      final: isMobile ? { x: 90, y: 85 } : { x: 195, y: 100 },
-      floatDelay: 0.5,
-    },
-    { 
-      label: "ADS",
-      fullLabel: "Performance Marketing",
-      distributed: isMobile ? { x: -95, y: 110 } : { x: -195, y: 155 },
-      final: isMobile ? { x: -75, y: 105 } : { x: -155, y: 140 },
-      floatDelay: 1,
-    },
-  ];
-
-  return (
-    <>
-      {blocks.map((block, i) => (
-        <motion.div
-          key={block.label}
-          className="absolute top-1/2 left-1/2 z-5"
-          initial={{ 
-            x: block.distributed.x, 
-            y: block.distributed.y,
-            opacity: 0.6,
-            rotate: i % 2 === 0 ? -5 : 5,
-          }}
-          animate={{
-            x: isDistributed ? block.distributed.x : block.final.x,
-            y: isDistributed
-              ? [block.distributed.y - 5, block.distributed.y + 5, block.distributed.y - 5]
-              : isLiving
-                ? [block.final.y - 3, block.final.y + 3, block.final.y - 3]
-                : block.final.y,
-            opacity: showFinal ? (isLiving ? [0.7, 0.9, 0.7] : 0.85) : isDistributed ? 0.6 : 0.8,
-            rotate: isDistributed ? (i % 2 === 0 ? -5 : 5) : 0,
-            scale: showFinal ? 1 : 0.9,
-          }}
-          transition={{
-            x: { duration: 1, ease: EASE_SMOOTH },
-            y: (isDistributed || isLiving)
-              ? { duration: isDistributed ? 3.8 + i * 0.3 : 4.5, repeat: Infinity, ease: EASE_FLOAT, delay: block.floatDelay }
-              : { duration: 1, ease: EASE_SMOOTH },
-            opacity: isLiving 
-              ? { duration: 3, repeat: Infinity, ease: EASE_FLOAT }
-              : { duration: 0.6, ease: EASE_SMOOTH },
-            rotate: { duration: 1, ease: EASE_SMOOTH },
-            scale: { duration: 0.8, ease: EASE_SMOOTH },
-          }}
-        >
-          <div className="relative">
-            <div className={`${isMobile ? 'px-2.5 py-1' : 'px-3.5 py-1.5'} rounded-full bg-secondary/80 border border-border/40 shadow-sm`}>
-              <span className={`${isMobile ? 'text-[9px]' : 'text-[11px]'} font-semibold text-muted-foreground tracking-wide`}>
-                {block.label}
-              </span>
-            </div>
-            {/* Full label below */}
-            <motion.div
-              className="absolute top-full left-1/2 -translate-x-1/2 mt-0.5 whitespace-nowrap"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: showFinal ? 0.5 : 0 }}
-              transition={{ duration: 0.4, delay: 0.3 + i * 0.1, ease: EASE_SMOOTH }}
-            >
-              <span className={`${isMobile ? 'text-[6px]' : 'text-[8px]'} text-muted-foreground/60 tracking-wide`}>
-                {block.fullLabel}
-              </span>
-            </motion.div>
-          </div>
-        </motion.div>
-      ))}
-    </>
-  );
-};
-
-// Growth metrics that wrap around the system
-const GrowthMetrics = ({ phase, isMobile }: { phase: Phase; isMobile: boolean }) => {
-  const isDistributed = phase === "distributed";
-  const isLiving = phase === "living";
-  const showFinal = phase === "revealed" || isLiving;
-  
-  const distributed = isMobile
-    ? { x: 85, y: 100 }
-    : { x: 190, y: 120 };
-  
-  const final = isMobile
-    ? { x: 65, y: 70 }
-    : { x: 145, y: 85 };
-
-  return (
-    <motion.div
-      className="absolute top-1/2 left-1/2 z-5"
-      initial={{ x: distributed.x, y: distributed.y, opacity: 0.6, rotate: 8 }}
-      animate={{
-        x: isDistributed ? distributed.x : final.x,
-        y: isDistributed
-          ? [distributed.y + 6, distributed.y - 6, distributed.y + 6]
-          : isLiving
-            ? [final.y - 4, final.y + 4, final.y - 4]
-            : final.y,
-        opacity: showFinal ? 1 : isDistributed ? 0.6 : 0.8,
-        rotate: isDistributed ? 8 : 0,
-        scale: showFinal ? 1 : 0.9,
-      }}
-      transition={{
-        x: { duration: 1, ease: EASE_SMOOTH },
-        y: (isDistributed || isLiving)
-          ? { duration: isDistributed ? 4.2 : 5.2, repeat: Infinity, ease: EASE_FLOAT }
-          : { duration: 1, ease: EASE_SMOOTH },
         opacity: { duration: 0.6, ease: EASE_SMOOTH },
-        rotate: { duration: 1, ease: EASE_SMOOTH },
         scale: { duration: 0.8, ease: EASE_SMOOTH },
       }}
     >
-      {/* Analytics label */}
-      <motion.div
-        className="absolute -top-3.5 left-1/2 -translate-x-1/2 whitespace-nowrap"
-        initial={{ opacity: 0, y: 5 }}
-        animate={{ opacity: showFinal ? 0.7 : 0, y: showFinal ? 0 : 5 }}
-        transition={{ duration: 0.4, delay: 0.35, ease: EASE_SMOOTH }}
-      >
-        <span className={`${isMobile ? 'text-[7px]' : 'text-[9px]'} font-medium uppercase tracking-wider text-muted-foreground/80`}>
-          Analytics & Growth
-        </span>
-      </motion.div>
-      
-      <div className={`${isMobile ? 'p-2' : 'p-2.5'} rounded-lg bg-card/90 border border-border/50 shadow-lg backdrop-blur-sm`}>
+      <div className={`${isMobile ? 'p-2' : 'p-2.5'} rounded-lg bg-card/95 border border-border/60 shadow-lg backdrop-blur-sm`}>
         <svg 
-          viewBox="0 0 80 45" 
-          className={isMobile ? "w-[65px] h-[36px]" : "w-[85px] h-[48px]"}
+          viewBox="0 0 70 40" 
+          className={isMobile ? "w-[60px] h-[34px]" : "w-[80px] h-[45px]"}
         >
-          {[12, 24, 36].map((y, i) => (
-            <line key={i} x1="0" y1={y} x2="80" y2={y} stroke="hsl(var(--border))" strokeWidth="0.5" opacity="0.4" />
+          {/* Grid lines */}
+          {[10, 20, 30].map((y, i) => (
+            <line key={i} x1="0" y1={y} x2="70" y2={y} stroke="hsl(var(--border))" strokeWidth="0.5" opacity="0.5" />
           ))}
           
+          {/* Growth line */}
           <motion.path
-            d="M4 38 Q20 34 35 26 T55 14 T76 6"
-            stroke="url(#growthGrad)"
+            d="M4 34 Q18 30 30 22 T50 12 T66 5"
+            stroke="url(#growthGradient)"
             strokeWidth="2.5"
             fill="none"
             strokeLinecap="round"
             initial={{ pathLength: 0 }}
-            animate={{ pathLength: showFinal ? 1 : 0 }}
-            transition={{ duration: 1, ease: EASE_SMOOTH, delay: 0.3 }}
+            animate={{ pathLength: isRevealed ? 1 : 0 }}
+            transition={{ duration: 1, ease: EASE_SMOOTH, delay: 0.4 }}
           />
           
-          {isLiving && (
-            <motion.path
-              d="M4 38 Q20 34 35 26 T55 14 T76 6"
-              stroke="url(#growthGrad)"
-              strokeWidth="2.5"
-              fill="none"
-              strokeLinecap="round"
-              opacity="0.3"
-              initial={{ y: 0 }}
-              animate={{ y: [-2, 2, -2] }}
-              transition={{ duration: 3, repeat: Infinity, ease: EASE_FLOAT }}
-            />
-          )}
-          
           <defs>
-            <linearGradient id="growthGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <linearGradient id="growthGradient" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stopColor="hsl(var(--pink))" />
               <stop offset="50%" stopColor="hsl(var(--lavender))" />
               <stop offset="100%" stopColor="hsl(var(--purple))" />
             </linearGradient>
           </defs>
           
+          {/* End point */}
           <motion.circle
-            cx="76" cy="6" r="4"
+            cx="66" cy="5" r="4"
             fill="hsl(var(--pink))"
             initial={{ scale: 0 }}
             animate={{ 
-              scale: showFinal ? 1 : 0,
+              scale: isRevealed ? 1 : 0,
               r: isLiving ? [4, 5, 4] : 4,
             }}
             transition={{ 
-              scale: { duration: 0.5, ease: EASE_SMOOTH, delay: 0.6 },
+              scale: { duration: 0.5, ease: EASE_SMOOTH, delay: 0.7 },
               r: { duration: 2, repeat: Infinity, ease: EASE_FLOAT },
             }}
           />
         </svg>
         
+        {/* Growth indicator */}
         <motion.div
-          className="flex items-center gap-1 mt-1"
+          className="flex items-center justify-center gap-1 mt-1"
           initial={{ opacity: 0 }}
-          animate={{ opacity: showFinal ? 1 : 0 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
+          animate={{ opacity: isRevealed ? 1 : 0 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
         >
-          <div className="w-0 h-0 border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent border-b-[6px] border-b-emerald-500" />
-          <span className={`${isMobile ? 'text-[8px]' : 'text-[9px]'} font-semibold text-emerald-600`}>+127%</span>
+          <Zap size={isMobile ? 8 : 10} className="text-emerald-500" />
+          <span className={`${isMobile ? 'text-[8px]' : 'text-[10px]'} font-bold text-emerald-500`}>+127%</span>
         </motion.div>
       </div>
     </motion.div>
   );
 };
 
-// Social media tiles
-const SocialTiles = ({ phase, isMobile }: { phase: Phase; isMobile: boolean }) => {
-  const isDistributed = phase === "distributed";
+// Central tagline
+const CentralTagline = ({ phase, isMobile }: { phase: Phase; isMobile: boolean }) => {
+  const show = phase === "revealed" || phase === "living";
   const isLiving = phase === "living";
-  const showFinal = phase === "revealed" || isLiving;
-  
-  const tiles = [
-    {
-      distributed: isMobile ? { x: -115, y: -60 } : { x: -250, y: -70 },
-      final: isMobile ? { x: -110, y: 40 } : { x: -230, y: 45 },
-      color: "from-pink/40 to-purple/40",
-      label: "Social",
-    },
-    {
-      distributed: isMobile ? { x: 105, y: 130 } : { x: 240, y: 145 },
-      final: isMobile ? { x: 95, y: 115 } : { x: 210, y: 135 },
-      color: "from-lavender/40 to-pink/40",
-      label: "Engage",
-    },
-  ];
 
   return (
-    <>
-      {tiles.map((tile, i) => (
-        <motion.div
-          key={i}
-          className="absolute top-1/2 left-1/2 z-5"
-          initial={{ 
-            x: tile.distributed.x, 
-            y: tile.distributed.y, 
-            opacity: 0.5,
-            rotate: i === 0 ? -10 : 10,
-          }}
-          animate={{
-            x: isDistributed ? tile.distributed.x : tile.final.x,
-            y: isDistributed
-              ? [tile.distributed.y - 4, tile.distributed.y + 4, tile.distributed.y - 4]
-              : isLiving
-                ? [tile.final.y - 3, tile.final.y + 3, tile.final.y - 3]
-                : tile.final.y,
-            opacity: showFinal ? 0.9 : isDistributed ? 0.5 : 0.7,
-            rotate: isDistributed ? (i === 0 ? -10 : 10) : 0,
-            scale: showFinal ? 1 : 0.85,
-          }}
-          transition={{
-            x: { duration: 1, ease: EASE_SMOOTH },
-            y: (isDistributed || isLiving)
-              ? { duration: isDistributed ? 4.5 + i * 0.3 : 5, repeat: Infinity, ease: EASE_FLOAT }
-              : { duration: 1, ease: EASE_SMOOTH },
-            opacity: { duration: 0.6, ease: EASE_SMOOTH },
-            rotate: { duration: 1, ease: EASE_SMOOTH },
-            scale: { duration: 0.8, ease: EASE_SMOOTH },
-          }}
-        >
-          <div className="relative">
-            <div className={`${isMobile ? 'w-8 h-8' : 'w-10 h-10'} rounded-lg bg-gradient-to-br ${tile.color} border border-border/30 shadow-sm flex items-center justify-center`}>
-              <div className={`${isMobile ? 'w-3 h-3' : 'w-4 h-4'} rounded-sm bg-white/50`} />
-            </div>
-            {/* Micro label */}
-            <motion.div
-              className="absolute top-full left-1/2 -translate-x-1/2 mt-0.5 whitespace-nowrap"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: showFinal ? 0.5 : 0 }}
-              transition={{ duration: 0.4, delay: 0.4 + i * 0.1, ease: EASE_SMOOTH }}
-            >
-              <span className={`${isMobile ? 'text-[6px]' : 'text-[7px]'} text-muted-foreground/50 tracking-wide`}>
-                {tile.label}
-              </span>
-            </motion.div>
-          </div>
-        </motion.div>
-      ))}
-    </>
+    <motion.div
+      className="absolute top-1/2 left-1/2 z-25 pointer-events-none"
+      style={{ x: "-50%" }}
+      initial={{ opacity: 0, y: isMobile ? 85 : 110 }}
+      animate={{
+        opacity: show ? 1 : 0,
+        y: show 
+          ? (isLiving ? [isMobile ? 80 : 105, isMobile ? 78 : 102, isMobile ? 80 : 105] : (isMobile ? 80 : 105))
+          : (isMobile ? 85 : 110),
+      }}
+      transition={{
+        opacity: { duration: 0.6, delay: 0.5, ease: EASE_SMOOTH },
+        y: isLiving 
+          ? { duration: 4.5, repeat: Infinity, ease: EASE_FLOAT }
+          : { duration: 0.6, delay: 0.5, ease: EASE_SMOOTH },
+      }}
+    >
+      <div className="text-center px-4 py-2 rounded-xl bg-card/80 border border-border/50 backdrop-blur-sm shadow-lg">
+        <div className={`${isMobile ? 'text-[11px]' : 'text-sm'} font-bold uppercase tracking-[0.15em] text-foreground`}>
+          Design · Build · Scale
+        </div>
+        <div className={`${isMobile ? 'text-[9px]' : 'text-[11px]'} text-muted-foreground mt-0.5`}>
+          End-to-End Digital Execution
+        </div>
+      </div>
+    </motion.div>
   );
 };
 
-// Additional service elements for density
-const ServiceElements = ({ phase, isMobile }: { phase: Phase; isMobile: boolean }) => {
-  const isDistributed = phase === "distributed";
-  const isLiving = phase === "living";
-  const showFinal = phase === "revealed" || isLiving;
-  
-  if (isMobile) return null; // Skip on mobile for cleaner layout
-  
-  const elements = [
-    {
-      type: "email",
-      distributed: { x: -280, y: -10 },
-      final: { x: -260, y: 0 },
-      label: "Email",
-    },
-    {
-      type: "analytics",
-      distributed: { x: 270, y: -30 },
-      final: { x: 250, y: -20 },
-      label: "Metrics",
-    },
-    {
-      type: "automation",
-      distributed: { x: -250, y: 120 },
-      final: { x: -235, y: 110 },
-      label: "Automation",
-    },
-  ];
-
-  return (
-    <>
-      {elements.map((el, i) => (
-        <motion.div
-          key={el.type}
-          className="absolute top-1/2 left-1/2 z-3"
-          initial={{ 
-            x: el.distributed.x, 
-            y: el.distributed.y, 
-            opacity: 0.4,
-            scale: 0.8,
-          }}
-          animate={{
-            x: isDistributed ? el.distributed.x : el.final.x,
-            y: isDistributed
-              ? [el.distributed.y - 3, el.distributed.y + 3, el.distributed.y - 3]
-              : isLiving
-                ? [el.final.y - 2, el.final.y + 2, el.final.y - 2]
-                : el.final.y,
-            opacity: showFinal ? 0.7 : isDistributed ? 0.4 : 0.5,
-            scale: showFinal ? 0.95 : 0.8,
-          }}
-          transition={{
-            x: { duration: 1, ease: EASE_SMOOTH },
-            y: (isDistributed || isLiving)
-              ? { duration: 5 + i * 0.4, repeat: Infinity, ease: EASE_FLOAT }
-              : { duration: 1, ease: EASE_SMOOTH },
-            opacity: { duration: 0.6, ease: EASE_SMOOTH },
-            scale: { duration: 0.8, ease: EASE_SMOOTH },
-          }}
-        >
-          <div className="relative flex flex-col items-center">
-            <div className="w-7 h-7 rounded-md bg-muted/50 border border-border/30 flex items-center justify-center">
-              {el.type === "email" && (
-                <div className="w-4 h-3 rounded-sm border border-muted-foreground/30" />
-              )}
-              {el.type === "analytics" && (
-                <div className="flex gap-0.5 items-end">
-                  <div className="w-1 h-2 bg-muted-foreground/30 rounded-sm" />
-                  <div className="w-1 h-3 bg-muted-foreground/40 rounded-sm" />
-                  <div className="w-1 h-2.5 bg-muted-foreground/35 rounded-sm" />
-                </div>
-              )}
-              {el.type === "automation" && (
-                <div className="w-3 h-3 rounded-full border-2 border-muted-foreground/30 border-dashed" />
-              )}
-            </div>
-            <motion.span
-              className="text-[7px] text-muted-foreground/40 mt-0.5 tracking-wide"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: showFinal ? 0.5 : 0 }}
-              transition={{ duration: 0.4, delay: 0.5 + i * 0.1 }}
-            >
-              {el.label}
-            </motion.span>
-          </div>
-        </motion.div>
-      ))}
-    </>
-  );
-};
-
-// Static stable state for reduced motion
+// Static stable state
 const StableState = ({ isMobile }: { isMobile: boolean }) => (
-  <div className="relative w-full h-full min-h-[450px] flex items-center justify-center">
-    <div className={`relative ${isMobile ? 'w-[300px] h-[360px]' : 'w-[540px] h-[440px]'}`}>
+  <div className="relative w-full h-full min-h-[480px] flex items-center justify-center">
+    <div className={`relative ${isMobile ? 'w-[340px] h-[400px]' : 'w-[640px] h-[520px]'}`}>
       {/* Background grid */}
-      <div className="absolute inset-0 opacity-10">
+      <div className="absolute inset-0 opacity-8">
         <svg className="w-full h-full">
           <defs>
-            <pattern id="staticGrid" width="40" height="40" patternUnits="userSpaceOnUse">
-              <circle cx="20" cy="20" r="1" fill="hsl(var(--muted-foreground))" />
+            <pattern id="staticGrid" width="35" height="35" patternUnits="userSpaceOnUse">
+              <circle cx="17.5" cy="17.5" r="1.5" fill="hsl(var(--foreground))" />
             </pattern>
           </defs>
           <rect width="100%" height="100%" fill="url(#staticGrid)" />
         </svg>
       </div>
       
+      {/* Orbital ring */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+        <div className={`${isMobile ? 'w-[260px] h-[260px]' : 'w-[450px] h-[450px]'} rounded-full border border-dashed border-lavender/20`} />
+      </div>
+      
       {/* Central brand */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
-        <div className="text-center">
-          <div className={`${isMobile ? 'text-[7px]' : 'text-[9px]'} font-medium uppercase tracking-wider text-muted-foreground/60 mb-2`}>
-            Brand Identity
-          </div>
-          <div className={`${isMobile ? 'w-18 h-18' : 'w-24 h-24'} rounded-2xl bg-gradient-to-br from-pink via-lavender to-purple shadow-xl flex items-center justify-center mx-auto`}>
-            <svg viewBox="0 0 60 60" className={isMobile ? "w-9 h-9" : "w-12 h-12"}>
-              <path d="M30 8L8 30L30 52L52 30L30 8Z" stroke="white" strokeWidth="2.5" fill="white" fillOpacity="0.2" />
-              <circle cx="30" cy="30" r="7" fill="white" />
-            </svg>
-          </div>
-          <div className={`${isMobile ? 'text-[9px]' : 'text-xs'} font-semibold uppercase tracking-[0.15em] text-foreground/60 mt-4`}>
-            Design · Build · Scale
-          </div>
-          <div className={`${isMobile ? 'text-[7px]' : 'text-[10px]'} text-muted-foreground/50 mt-1`}>
-            End-to-End Digital Execution
-          </div>
+        <div className={`${isMobile ? 'w-[85px] h-[85px]' : 'w-[120px] h-[120px]'} rounded-2xl bg-gradient-to-br from-pink via-lavender to-purple shadow-2xl flex items-center justify-center`} style={{ transform: 'scale(1.12)' }}>
+          <svg viewBox="0 0 60 60" className={isMobile ? "w-10 h-10" : "w-14 h-14"}>
+            <path d="M30 8L8 30L30 52L52 30L30 8Z" stroke="white" strokeWidth="2.5" fill="white" fillOpacity="0.2" />
+            <circle cx="30" cy="30" r="7" fill="white" />
+          </svg>
         </div>
       </div>
       
-      {/* Website */}
-      <div className={`absolute ${isMobile ? 'left-2 top-[35%] w-[95px] h-[70px]' : 'left-6 top-[35%] w-[130px] h-[95px]'} rounded-xl bg-card border border-border/50 shadow-lg`}>
-        <div className="h-3 border-b border-border/30 bg-muted/30 rounded-t-xl" />
-        <div className="p-2 space-y-1">
-          <div className="h-3 bg-gradient-to-r from-pink/20 to-lavender/20 rounded-sm" />
-          <div className="flex gap-1">
-            <div className="flex-1 h-4 bg-muted/40 rounded-sm" />
-            <div className="flex-1 h-4 bg-muted/40 rounded-sm" />
-          </div>
+      {/* Service labels */}
+      {[
+        { icon: Palette, label: "Branding", x: isMobile ? -110 : -220, y: isMobile ? -120 : -150 },
+        { icon: Globe, label: "Website", x: isMobile ? -80 : -150, y: isMobile ? -20 : -25 },
+        { icon: Smartphone, label: "App", x: isMobile ? 50 : 95, y: isMobile ? -15 : -20 },
+        { icon: Search, label: "SEO", x: isMobile ? 90 : 200, y: isMobile ? -100 : -130 },
+        { icon: BarChart3, label: "Analytics", x: isMobile ? 85 : 180, y: isMobile ? 60 : 80 },
+        { icon: TrendingUp, label: "Growth", x: isMobile ? -90 : -180, y: isMobile ? 100 : 130 },
+      ].map(({ icon: Icon, label, x, y }) => (
+        <div 
+          key={label}
+          className="absolute top-1/2 left-1/2 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-card/95 border border-border/60 shadow-md"
+          style={{ transform: `translate(${x}px, ${y}px)` }}
+        >
+          <Icon size={isMobile ? 11 : 13} className="text-pink" />
+          <span className={`${isMobile ? 'text-[10px]' : 'text-xs'} font-semibold text-foreground`}>{label}</span>
         </div>
-        <div className={`absolute -top-3 left-1/2 -translate-x-1/2 ${isMobile ? 'text-[6px]' : 'text-[8px]'} text-muted-foreground/50 tracking-wide`}>
-          Website
-        </div>
-      </div>
+      ))}
       
-      {/* App */}
-      <div className={`absolute ${isMobile ? 'right-3 top-[35%] w-[42px] h-[68px]' : 'right-8 top-[35%] w-[52px] h-[85px]'} rounded-xl bg-card border border-border/50 shadow-lg`}>
-        <div className="pt-1 flex justify-center">
-          <div className="w-5 h-1 bg-muted/50 rounded-full" />
+      {/* Tagline */}
+      <div 
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 text-center px-4 py-2 rounded-xl bg-card/80 border border-border/50 shadow-lg"
+        style={{ transform: `translate(-50%, ${isMobile ? 90 : 120}px)` }}
+      >
+        <div className={`${isMobile ? 'text-[11px]' : 'text-sm'} font-bold uppercase tracking-[0.15em] text-foreground`}>
+          Design · Build · Scale
         </div>
-        <div className="p-1.5 space-y-1 mt-1">
-          <div className="h-4 bg-gradient-to-br from-pink/20 to-lavender/20 rounded-md" />
-          <div className="h-1 bg-muted/30 rounded-sm" />
+        <div className={`${isMobile ? 'text-[9px]' : 'text-[11px]'} text-muted-foreground mt-0.5`}>
+          End-to-End Digital Execution
         </div>
-        <div className={`absolute -top-3 left-1/2 -translate-x-1/2 ${isMobile ? 'text-[6px]' : 'text-[8px]'} text-muted-foreground/50 tracking-wide`}>
-          App
-        </div>
-      </div>
-      
-      {/* Growth chart */}
-      <div className={`absolute ${isMobile ? 'right-3 bottom-12' : 'right-10 bottom-16'} p-2 rounded-lg bg-card/80 border border-border/40`}>
-        <svg viewBox="0 0 60 30" className={isMobile ? "w-[48px] h-[24px]" : "w-[65px] h-[32px]"}>
-          <path d="M4 26 Q18 22 30 16 T56 4" stroke="url(#staticGrowth)" strokeWidth="2" fill="none" />
-          <defs>
-            <linearGradient id="staticGrowth" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="hsl(var(--pink))" />
-              <stop offset="100%" stopColor="hsl(var(--purple))" />
-            </linearGradient>
-          </defs>
-        </svg>
-        <div className={`absolute -top-3 left-1/2 -translate-x-1/2 ${isMobile ? 'text-[6px]' : 'text-[8px]'} text-muted-foreground/50 tracking-wide whitespace-nowrap`}>
-          Analytics
-        </div>
-      </div>
-      
-      {/* Content badges */}
-      <div className={`absolute ${isMobile ? 'left-3 bottom-14' : 'left-8 bottom-20'} flex flex-col gap-1.5`}>
-        {["SEO", "ADS", "CONTENT"].map((label, i) => (
-          <div key={label} className="px-2 py-0.5 rounded-full bg-secondary/70 border border-border/30">
-            <span className={`${isMobile ? 'text-[8px]' : 'text-[10px]'} font-semibold text-muted-foreground`}>{label}</span>
-          </div>
-        ))}
       </div>
     </div>
   </div>
