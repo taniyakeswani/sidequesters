@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { X } from "lucide-react";
 
 // Import assets
@@ -167,10 +168,14 @@ const PhoolDastaan = () => {
 
       {/* Lightbox Dialog */}
       <Dialog open={!!selectedImage} onOpenChange={() => setSelectedImage(null)}>
-        <DialogContent className="max-w-5xl w-[95vw] p-0 bg-background/95 backdrop-blur-md border-border/50 overflow-hidden">
+        <DialogContent className="max-w-5xl w-[95vw] p-0 bg-background/95 backdrop-blur-md border-border/50 overflow-hidden [&>button]:hidden">
+          <VisuallyHidden>
+            <DialogTitle>{selectedImage?.title || "Image preview"}</DialogTitle>
+            <DialogDescription>{selectedImage?.description || "Project image lightbox"}</DialogDescription>
+          </VisuallyHidden>
           <button
             onClick={() => setSelectedImage(null)}
-            className="absolute top-4 right-4 z-50 p-2 rounded-full bg-foreground/10 hover:bg-foreground/20 transition-colors"
+            className="absolute top-4 right-4 z-50 p-2 rounded-full bg-background/80 hover:bg-background border border-border/50 transition-colors shadow-md"
             aria-label="Close lightbox"
           >
             <X className="w-5 h-5 text-foreground" />
