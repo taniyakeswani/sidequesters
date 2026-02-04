@@ -1,33 +1,8 @@
 import { useEffect, useState } from "react";
 import { Lightbulb, Rocket, Handshake, Sparkles } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import FoundersSection from "@/components/FoundersSection";
 
-const founders = [
-  {
-    name: "Aastha",
-    superpower: "Clarity over complexity",
-    description: "We simplify problems before solving them.",
-    icon: Lightbulb,
-    gradient: "from-pink/20 to-lavender/20",
-    iconGradient: "from-pink to-primary/80",
-  },
-  {
-    name: "Tanya",
-    superpower: "Built for scale",
-    description: "Everything we ship is designed to grow with you.",
-    icon: Rocket,
-    gradient: "from-lavender/20 to-purple/20",
-    iconGradient: "from-lavender to-purple",
-  },
-  {
-    name: "Aarushi",
-    superpower: "Partnership mindset",
-    description: "We work with clients, not just for them.",
-    icon: Handshake,
-    gradient: "from-purple/20 to-magenta/20",
-    iconGradient: "from-purple to-magenta",
-  },
-];
 
 const services = [
   "Logo Creation",
@@ -184,54 +159,7 @@ const About = () => {
           </section>
 
           {/* Founders Section */}
-          <section>
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-foreground mb-4">
-                Meet the Founders
-              </h2>
-              <p className="text-muted-foreground max-w-xl mx-auto">
-                Three minds. One mission. Building digital unfair advantages.
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-              {founders.map((founder, index) => (
-                <div
-                  key={founder.name}
-                  className={`bg-gradient-to-br ${founder.gradient} bg-card rounded-3xl p-8 shadow-card hover:shadow-lg transition-all duration-500 border border-border/30 group ${
-                    isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-                  }`}
-                  style={{ transitionDelay: `${800 + index * 150}ms` }}
-                >
-                  {/* Abstract Icon */}
-                  <div className="flex justify-center mb-6">
-                    <div className={`w-24 h-24 rounded-2xl bg-gradient-to-br ${founder.iconGradient} flex items-center justify-center transform transition-transform duration-300 group-hover:scale-105 group-hover:rotate-3`}>
-                      <founder.icon className="w-10 h-10 text-white" />
-                    </div>
-                  </div>
-
-                  {/* Name & Details */}
-                  <div className="text-center">
-                    <h3 className="text-2xl font-semibold text-foreground mb-3">
-                      {founder.name}
-                    </h3>
-                    
-                    {/* Superpower Badge */}
-                    <div className="inline-block px-4 py-2 rounded-full bg-secondary/80 mb-4">
-                      <span className="text-sm font-medium text-foreground">
-                        Superpower: {founder.superpower}
-                      </span>
-                    </div>
-                    
-                    {/* Description */}
-                    <p className="text-muted-foreground leading-relaxed">
-                      {founder.description}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
+          <FoundersSection />
         </div>
       </main>
 
@@ -248,10 +176,11 @@ const About = () => {
             foundingDate: "2024",
             areaServed: "India",
             serviceType: ["Logo Design", "Design Systems", "Web Development", "Mobile App Development", "SEO", "Social Media Marketing"],
-            founders: founders.map((founder) => ({
-              "@type": "Person",
-              name: founder.name,
-            })),
+            founders: [
+              { "@type": "Person", name: "Aastha" },
+              { "@type": "Person", name: "Tanya" },
+              { "@type": "Person", name: "Aarushi" },
+            ],
           }),
         }}
       />
