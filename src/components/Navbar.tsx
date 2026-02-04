@@ -1,24 +1,50 @@
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import ThemeToggle from "@/components/ThemeToggle";
 import logoIcon from "@/assets/logo-icon.png";
+
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
-  { label: "Work", href: "#work" },
+  { label: "Work", href: "/work" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
 
 const Navbar = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location]);
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? "bg-background/80 backdrop-blur-md border-b border-border/50 shadow-sm"
+          : "bg-transparent"
+      }`}
+    >
       <div className="container mx-auto max-w-[1440px] px-6 lg:px-12">
         <nav className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group">
-            <img 
-              src={logoIcon} 
-              alt="SideQuesters Logo" 
+            <img
+              src={logoIcon}
+              alt="SideQuesters Logo"
               className="h-9 w-9 object-contain transition-transform group-hover:scale-105"
             />
             <span className="text-xl font-semibold text-foreground">
@@ -26,34 +52,78 @@ const Navbar = () => {
             </span>
           </Link>
 
-          {/* Navigation Links */}
+          {/* Desktop Navigation Links */}
           <ul className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <li key={link.label}>
-                {link.href.startsWith('/') ? (
-                  <Link
-                    to={link.href}
-                    className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200"
-                  >
-                    {link.label}
-                  </Link>
-                ) : (
-                  <a
-                    href={link.href}
-                    className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200"
-                  >
-                    {link.label}
-                  </a>
-                )}
+                <Link
+                  to={link.href}
+                  className={`text-sm font-medium transition-colors duration-200 ${
+                    location.pathname === link.href
+                      ? "text-foreground"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  {link.label}
+                </Link>
               </li>
             ))}
           </ul>
 
-          {/* CTA Button */}
-          <Button variant="hero" size="default" className="hidden sm:flex">
-            View Our Work
-          </Button>
+          {/* Desktop Actions */}
+          <div className="hidden md:flex items-center gap-4">
+            <ThemeToggle />
+            <Button variant="hero" size="default" asChild>
+              <Link to="/work">View Our Work</Link>
+            </Button>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <div className="flex md:hidden items-center gap-2">
+            <ThemeToggle />
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="rounded-full"
+              aria-label="Toggle mobile menu"
+            >
+              {isMobileMenuOpen ? (
+                <X className="h-5 w-5" />
+              ) : (
+                <Menu className="h-5 w-5" />
+              )}
+            </Button>
+          </div>
         </nav>
+
+        {/* Mobile Menu */}
+        <div
+          className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+            isMobileMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+          }`}
+        >
+          <div className="py-4 space-y-2 border-t border-border/50">
+            {navLinks.map((link) => (
+              <Link
+                key={link.label}
+                to={link.href}
+                className={`block px-4 py-3 rounded-xl text-sm font-medium transition-colors ${
+                  location.pathname === link.href
+                    ? "bg-secondary text-foreground"
+                    : "text-muted-foreground hover:bg-secondary hover:text-foreground"
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+            <div className="px-4 pt-2">
+              <Button variant="hero" size="default" className="w-full" asChild>
+                <Link to="/work">View Our Work</Link>
+              </Button>
+            </div>
+          </div>
+        </div>
       </div>
     </header>
   );

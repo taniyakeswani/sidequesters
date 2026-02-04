@@ -169,7 +169,7 @@ const Contact = () => {
             <div className="flex flex-wrap items-center justify-center gap-8 mt-10 text-sm text-muted-foreground">
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-pink" />
-                <span>hello@sidequest.co</span>
+                <span>hello@sidequesters.in</span>
               </div>
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-pink" />
