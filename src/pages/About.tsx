@@ -45,7 +45,7 @@ const About = () => {
     document.title = "About Us | SideQuesters - Digital Studio India";
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
-      metaDescription.setAttribute("content", "At SideQuesters, we turn ideas into fully-fledged digital businesses. Logo, design, websites, apps, SEO, and social media growth—all in one place.");
+      metaDescription.setAttribute("content", "At SideQuesters, we turn ideas into fully-fledged digital businesses. Logo, design, websites, apps, SEO, and social media growth, all in one place.");
     }
     
     setTimeout(() => setIsVisible(true), 100);
@@ -89,7 +89,7 @@ const About = () => {
                 }`}
               >
                 At <strong className="text-foreground">SideQuesters</strong>, we turn ideas into fully-fledged digital businesses. 
-                From logo creation and complete design systems to websites, apps, SEO, and social media growth—everything happens in one place.
+                From logo creation and complete design systems to websites, apps, SEO, and social media growth, everything happens in one place.
               </p>
               
               {/* Animated Tagline */}
@@ -156,7 +156,7 @@ const About = () => {
                   </div>
                   <h3 className="text-xl font-semibold text-foreground mb-3">End-to-End Solutions</h3>
                   <p className="text-muted-foreground leading-relaxed">
-                    From concept to launch and beyond. We handle design, development, marketing, and growth—all under one roof.
+                    From concept to launch and beyond. We handle design, development, marketing, and growth, all under one roof.
                   </p>
                 </div>
                 
@@ -166,7 +166,7 @@ const About = () => {
                   </div>
                   <h3 className="text-xl font-semibold text-foreground mb-3">Built for Growth</h3>
                   <p className="text-muted-foreground leading-relaxed">
-                    Everything we ship is designed to scale with you. No band-aid fixes—just solid foundations for long-term success.
+                    Everything we ship is designed to scale with you. No band-aid fixes, just solid foundations for long-term success.
                   </p>
                 </div>
                 
@@ -244,7 +244,7 @@ const About = () => {
             "@type": "Organization",
             name: "SideQuesters",
             url: "https://sidequesters.in",
-            description: "At SideQuesters, we turn ideas into fully-fledged digital businesses. Logo, design, websites, apps, SEO, and social media growth—all in one place.",
+            description: "At SideQuesters, we turn ideas into fully-fledged digital businesses. Logo, design, websites, apps, SEO, and social media growth, all in one place.",
             foundingDate: "2024",
             areaServed: "India",
             serviceType: ["Logo Design", "Design Systems", "Web Development", "Mobile App Development", "SEO", "Social Media Marketing"],
