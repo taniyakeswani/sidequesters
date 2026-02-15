@@ -24,8 +24,8 @@ import {
 
 interface ServiceItem {
   name: string;
-  price: string;
   keywords?: string[];
+  recommended?: boolean;
 }
 
 interface ServiceCategory {
@@ -48,12 +48,12 @@ const serviceCategories = {
         description: "Professional websites that convert visitors into customers",
         gradient: "from-pink to-lavender",
         items: [
-          { name: "Website UI Design", price: "₹6,000+", keywords: ["web design", "UI design"] },
-          { name: "Landing Page (Design + Dev)", price: "₹8,000+", keywords: ["landing page", "conversion"] },
-          { name: "Static Website (Up to 5 Pages)", price: "₹12,000+", keywords: ["business website", "company website"] },
-          { name: "Business Website (6–8 Pages + SEO)", price: "₹20,000+", keywords: ["corporate website", "SEO"] },
-          { name: "Website Development (Per Page)", price: "₹2,000/page", keywords: ["web development"] },
-          { name: "Website Redesign", price: "₹10,000+", keywords: ["website makeover", "redesign"] },
+          { name: "Website UI Design", keywords: ["web design", "UI design"] },
+          { name: "Landing Page (Design + Dev)", keywords: ["landing page", "conversion"] },
+          { name: "Static Website (Up to 5 Pages)", keywords: ["business website", "company website"] },
+          { name: "Business Website (6–8 Pages + SEO)", keywords: ["corporate website", "SEO"], recommended: true },
+          { name: "Website Development (Per Page)", keywords: ["web development"] },
+          { name: "Website Redesign", keywords: ["website makeover", "redesign"] },
         ],
       },
       {
@@ -62,10 +62,10 @@ const serviceCategories = {
         description: "Scalable applications for web and mobile platforms",
         gradient: "from-lavender to-purple",
         items: [
-          { name: "Web App (Basic MVP)", price: "₹50,000+", keywords: ["web application", "MVP", "startup"] },
-          { name: "Advanced Web App", price: "₹1,00,000+", keywords: ["SaaS", "enterprise app"] },
-          { name: "Mobile App (Basic)", price: "₹70,000+", keywords: ["Android app", "iOS app"] },
-          { name: "Mobile App (Advanced)", price: "₹1,30,000+", keywords: ["cross-platform", "React Native"] },
+          { name: "Web App (Basic MVP)", keywords: ["web application", "MVP", "startup"], recommended: true },
+          { name: "Advanced Web App", keywords: ["SaaS", "enterprise app"] },
+          { name: "Mobile App (Basic)", keywords: ["Android app", "iOS app"] },
+          { name: "Mobile App (Advanced)", keywords: ["cross-platform", "React Native"] },
         ],
       },
       {
@@ -74,9 +74,9 @@ const serviceCategories = {
         description: "AI-powered bots to automate customer support & sales",
         gradient: "from-purple to-magenta",
         items: [
-          { name: "Website Chatbot", price: "₹8,000+", keywords: ["customer support", "AI chatbot"] },
-          { name: "WhatsApp Chatbot", price: "₹12,000+", keywords: ["WhatsApp automation", "business bot"] },
-          { name: "Advanced Automation", price: "₹25,000+", keywords: ["workflow automation", "Zapier"] },
+          { name: "Website Chatbot", keywords: ["customer support", "AI chatbot"] },
+          { name: "WhatsApp Chatbot", keywords: ["WhatsApp automation", "business bot"], recommended: true },
+          { name: "Advanced Automation", keywords: ["workflow automation", "Zapier"] },
         ],
       },
     ] as ServiceCategory[],
@@ -92,9 +92,9 @@ const serviceCategories = {
         description: "Rank higher on Google and drive organic traffic",
         gradient: "from-pink to-lavender",
         items: [
-          { name: "SEO Audit & Setup", price: "₹10,000+", keywords: ["SEO audit", "technical SEO"] },
-          { name: "SEO Monthly (Starter)", price: "₹12,000/mo", keywords: ["local SEO", "on-page SEO"] },
-          { name: "SEO Monthly (Growth)", price: "₹20,000/mo", keywords: ["content marketing", "link building"] },
+          { name: "SEO Audit & Setup", keywords: ["SEO audit", "technical SEO"] },
+          { name: "SEO Monthly (Starter)", keywords: ["local SEO", "on-page SEO"] },
+          { name: "SEO Monthly (Growth)", keywords: ["content marketing", "link building"], recommended: true },
         ],
       },
       {
@@ -103,9 +103,9 @@ const serviceCategories = {
         description: "Google Ads, Meta Ads & campaigns that deliver ROI",
         gradient: "from-lavender to-purple",
         items: [
-          { name: "Ads Setup (One-time)", price: "₹6,000+", keywords: ["Google Ads", "Facebook Ads"] },
-          { name: "Ads Management", price: "₹12,000/mo", keywords: ["PPC management", "ad optimization"] },
-          { name: "Performance Marketing", price: "₹25,000/mo", keywords: ["growth marketing", "ROAS"] },
+          { name: "Ads Setup (One-time)", keywords: ["Google Ads", "Facebook Ads"] },
+          { name: "Ads Management", keywords: ["PPC management", "ad optimization"], recommended: true },
+          { name: "Performance Marketing", keywords: ["growth marketing", "ROAS"] },
         ],
       },
       {
@@ -114,9 +114,9 @@ const serviceCategories = {
         description: "B2B lead generation through targeted email campaigns",
         gradient: "from-purple to-magenta",
         items: [
-          { name: "Cold Email Setup", price: "₹6,000+", keywords: ["email infrastructure", "deliverability"] },
-          { name: "Cold Email Copywriting", price: "₹4,000+", keywords: ["email copy", "B2B outreach"] },
-          { name: "Cold Email Campaign", price: "₹12,000/mo", keywords: ["lead generation", "sales outreach"] },
+          { name: "Cold Email Setup", keywords: ["email infrastructure", "deliverability"] },
+          { name: "Cold Email Copywriting", keywords: ["email copy", "B2B outreach"] },
+          { name: "Cold Email Campaign", keywords: ["lead generation", "sales outreach"], recommended: true },
         ],
       },
     ] as ServiceCategory[],
@@ -132,11 +132,11 @@ const serviceCategories = {
         description: "Eye-catching visuals for digital marketing",
         gradient: "from-pink to-lavender",
         items: [
-          { name: "Poster Design", price: "₹800+", keywords: ["event poster", "promotional design"] },
-          { name: "Banner Design", price: "₹1,200+", keywords: ["web banner", "display ads"] },
-          { name: "Social Media Post", price: "₹800+", keywords: ["Instagram design", "social graphics"] },
-          { name: "YouTube Thumbnail", price: "₹600+", keywords: ["thumbnail design", "YouTube"] },
-          { name: "Ad Creative Design", price: "₹1,200+", keywords: ["ad design", "creative assets"] },
+          { name: "Poster Design", keywords: ["event poster", "promotional design"] },
+          { name: "Banner Design", keywords: ["web banner", "display ads"] },
+          { name: "Social Media Post", keywords: ["Instagram design", "social graphics"], recommended: true },
+          { name: "YouTube Thumbnail", keywords: ["thumbnail design", "YouTube"] },
+          { name: "Ad Creative Design", keywords: ["ad design", "creative assets"] },
         ],
       },
       {
@@ -145,10 +145,10 @@ const serviceCategories = {
         description: "Complete brand identity that builds trust",
         gradient: "from-lavender to-purple",
         items: [
-          { name: "Business Card Design", price: "₹1,200+", keywords: ["visiting card", "corporate identity"] },
-          { name: "Letterhead / Invoice", price: "₹800+", keywords: ["stationery design", "invoice template"] },
-          { name: "Brand Kit (Logo, Colors)", price: "₹6,000+", keywords: ["logo design", "brand guidelines"] },
-          { name: "Complete Branding Package", price: "₹15,000+", keywords: ["brand identity", "visual identity"] },
+          { name: "Business Card Design", keywords: ["visiting card", "corporate identity"] },
+          { name: "Letterhead / Invoice", keywords: ["stationery design", "invoice template"] },
+          { name: "Brand Kit (Logo, Colors)", keywords: ["logo design", "brand guidelines"] },
+          { name: "Complete Branding Package", keywords: ["brand identity", "visual identity"], recommended: true },
         ],
       },
     ] as ServiceCategory[],
@@ -156,7 +156,7 @@ const serviceCategories = {
 };
 
 const highlights = [
-  { icon: Sparkles, text: "Transparent pricing — no hidden costs" },
+  { icon: Sparkles, text: "Custom solutions tailored to your needs" },
   { icon: Users, text: "Founder-led execution on every project" },
   { icon: Shield, text: "No long-term lock-ins or contracts" },
   { icon: CheckCircle2, text: "Dedicated support & revisions included" },
@@ -217,19 +217,19 @@ const ServiceCard = ({ category, index }: { category: ServiceCategory; index: nu
         {category.items.map((item) => (
           <motion.div 
             key={item.name} 
-            className="flex justify-between items-start gap-4 group/item"
+            className={`flex items-center gap-2 group/item ${item.recommended ? 'bg-pink/5 -mx-2 px-2 py-1.5 rounded-lg' : ''}`}
             whileHover={{ x: 4 }}
             transition={{ duration: 0.2 }}
           >
-            <div className="flex items-center gap-2">
-              <div className="w-1.5 h-1.5 rounded-full bg-pink/60 group-hover/item:bg-pink transition-colors" />
-              <span className="text-sm text-muted-foreground group-hover/item:text-foreground transition-colors">
-                {item.name}
-              </span>
-            </div>
-            <span className="text-sm font-semibold text-foreground whitespace-nowrap">
-              {item.price}
+            <div className={`w-1.5 h-1.5 rounded-full ${item.recommended ? 'bg-pink' : 'bg-pink/60 group-hover/item:bg-pink'} transition-colors flex-shrink-0`} />
+            <span className={`text-sm ${item.recommended ? 'text-foreground font-medium' : 'text-muted-foreground group-hover/item:text-foreground'} transition-colors`}>
+              {item.name}
             </span>
+            {item.recommended && (
+              <span className="ml-auto text-[11px] font-semibold text-pink bg-pink/10 px-2 py-0.5 rounded-full whitespace-nowrap">
+                Recommended
+              </span>
+            )}
           </motion.div>
         ))}
       </div>
@@ -241,10 +241,10 @@ const Services = () => {
   const [activeCategory, setActiveCategory] = useState<CategoryKey>("development");
 
   useEffect(() => {
-    document.title = "Services & Pricing | Web Development, SEO, Digital Marketing | SideQuesters";
+    document.title = "Services | Web Development, SEO, Digital Marketing | SideQuesters";
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
-      metaDescription.setAttribute("content", "Professional web development, SEO, digital marketing, and design services in India. Transparent pricing starting ₹600. Custom websites, apps, branding & growth marketing.");
+      metaDescription.setAttribute("content", "Professional web development, SEO, digital marketing, and design services in India. Custom websites, apps, branding & growth marketing by SideQuesters.");
     }
   }, []);
 
@@ -270,7 +270,7 @@ const Services = () => {
           >
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-pink/10 text-pink text-sm font-medium mb-6">
               <Sparkles className="w-4 h-4" />
-              Transparent Pricing
+              Our Services
             </span>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
               Services That <span className="gradient-text">Grow Your Business</span>
@@ -440,7 +440,7 @@ const Services = () => {
             url: "https://sidequesters.in",
             description: "Professional web development, SEO, digital marketing, and design services in India.",
             areaServed: "India",
-            priceRange: "₹600 - ₹1,30,000+",
+            priceRange: "Custom Quotes",
             hasOfferCatalog: {
               "@type": "OfferCatalog",
               name: "Digital Services",
