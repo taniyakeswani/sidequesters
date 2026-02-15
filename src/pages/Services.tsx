@@ -217,19 +217,14 @@ const ServiceCard = ({ category, index }: { category: ServiceCategory; index: nu
         {category.items.map((item) => (
           <motion.div 
             key={item.name} 
-            className={`flex items-center gap-2 group/item ${item.recommended ? 'bg-pink/5 -mx-2 px-2 py-1.5 rounded-lg' : ''}`}
+            className="flex items-center gap-2 group/item"
             whileHover={{ x: 4 }}
             transition={{ duration: 0.2 }}
           >
-            <div className={`w-1.5 h-1.5 rounded-full ${item.recommended ? 'bg-pink' : 'bg-pink/60 group-hover/item:bg-pink'} transition-colors flex-shrink-0`} />
-            <span className={`text-sm ${item.recommended ? 'text-foreground font-medium' : 'text-muted-foreground group-hover/item:text-foreground'} transition-colors`}>
+            <div className="w-1.5 h-1.5 rounded-full bg-pink/60 group-hover/item:bg-pink transition-colors flex-shrink-0" />
+            <span className="text-sm text-muted-foreground group-hover/item:text-foreground transition-colors">
               {item.name}
             </span>
-            {item.recommended && (
-              <span className="ml-auto text-[11px] font-semibold text-pink bg-pink/10 px-2 py-0.5 rounded-full whitespace-nowrap">
-                Recommended
-              </span>
-            )}
           </motion.div>
         ))}
       </div>
