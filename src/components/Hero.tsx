@@ -22,7 +22,8 @@ const Hero = () => {
             </h1>
             
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-md">
-              We help businesses build technology and grow visibility through smart IT solutions and digital marketing.
+              We design, develop, and scale digital systems that drive{" "}
+              <span className="gradient-text font-semibold">real business growth.</span>
             </p>
 
             <div className="flex flex-wrap gap-4 pt-2">

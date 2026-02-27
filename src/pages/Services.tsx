@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion, type Variants } from "framer-motion";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { 
@@ -41,6 +42,11 @@ const serviceCategories = {
     label: "Development",
     icon: Code,
     description: "Custom websites, web apps, mobile apps & chatbots built for performance",
+    customBox: {
+      accent: "Custom Development Solutions",
+      grey: "Have a unique tech requirement?",
+      black: "We design and build custom digital solutions tailored to your product vision.",
+    },
     services: [
       {
         icon: Globe,
@@ -58,14 +64,15 @@ const serviceCategories = {
       },
       {
         icon: Smartphone,
-        title: "Web & Mobile App Development",
-        description: "Scalable applications for web and mobile platforms",
+        title: "Software Development",
+        description: "Custom software solutions built for scale, performance, and real-world business needs.",
         gradient: "from-lavender to-purple",
         items: [
           { name: "Web App (Basic MVP)", keywords: ["web application", "MVP", "startup"], recommended: true },
           { name: "Advanced Web App", keywords: ["SaaS", "enterprise app"] },
           { name: "Mobile App (Basic)", keywords: ["Android app", "iOS app"] },
-          { name: "Mobile App (Advanced)", keywords: ["cross-platform", "React Native"] },
+          { name: "Mobile App (Basic)", keywords: ["Android app", "iOS app"] },
+          { name: "Software Development", keywords: ["cross-platform", "React Native"] },
         ],
       },
       {
@@ -85,6 +92,11 @@ const serviceCategories = {
     label: "Marketing",
     icon: Megaphone,
     description: "SEO, paid ads & outreach strategies to grow your online presence",
+    customBox: {
+      accent: "Custom Growth Solutions",
+      grey: "Need something beyond standard SEO or ads?",
+      black: "We build tailored acquisition, retention, and outreach systems aligned with your business model.",
+    },
     services: [
       {
         icon: Search,
@@ -125,6 +137,11 @@ const serviceCategories = {
     label: "Design",
     icon: PenTool,
     description: "Branding, graphics & visual content that makes you stand out",
+    customBox: {
+      accent: "Custom Brand Solutions",
+      grey: "Have a unique design requirement?",
+      black: "We craft tailored brand systems, visual identities, and creative assets aligned with your vision and audience.",
+    },
     services: [
       {
         icon: Palette,
@@ -186,15 +203,12 @@ const ServiceCard = ({ category, index }: { category: ServiceCategory; index: nu
     variants={itemVariants}
     className="group bg-card rounded-2xl p-6 shadow-card hover:shadow-lg transition-all duration-300 relative overflow-hidden border border-border/50"
   >
-    {/* Background gradient glow */}
     <motion.div 
       className={`absolute -top-20 -right-20 w-48 h-48 rounded-full bg-gradient-to-br ${category.gradient} opacity-10 blur-3xl pointer-events-none`}
       animate={{ scale: [1, 1.1, 1], opacity: [0.1, 0.15, 0.1] }}
       transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: index * 0.2 }}
     />
-    
     <div className="relative">
-      {/* Header */}
       <div className="flex items-start gap-4 mb-4">
         <div className={`inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br ${category.gradient} shadow-md`}>
           <category.icon className="w-6 h-6 text-primary-foreground" />
@@ -208,11 +222,7 @@ const ServiceCard = ({ category, index }: { category: ServiceCategory; index: nu
           </p>
         </div>
       </div>
-      
-      {/* Divider */}
       <div className="h-px bg-gradient-to-r from-border via-border/50 to-transparent mb-4" />
-      
-      {/* Service items */}
       <div className="space-y-3">
         {category.items.map((item) => (
           <motion.div 
@@ -251,12 +261,10 @@ const Services = () => {
 
       {/* Hero Section */}
       <section className="pt-32 pb-16 px-6 lg:px-12 relative overflow-hidden">
-        {/* Background elements */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-20 left-10 w-72 h-72 bg-pink/10 rounded-full blur-3xl" />
           <div className="absolute bottom-10 right-20 w-96 h-96 bg-lavender/10 rounded-full blur-3xl" />
         </div>
-
         <div className="container mx-auto max-w-[1440px] text-center relative">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -271,7 +279,7 @@ const Services = () => {
               Services That <span className="gradient-text">Grow Your Business</span>
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-              From custom websites to SEO and branding — everything you need to build and scale your digital presence.
+              From logo to launch-ready digital systems — everything, in one place. You name the goal. We build the solution.
             </p>
           </motion.div>
         </div>
@@ -343,6 +351,38 @@ const Services = () => {
         </div>
       </section>
 
+      {/* Custom Box — changes per category, above Why Clients Choose Us */}
+      <section className="pb-10 px-6 lg:px-12">
+        <div className="container mx-auto max-w-[1440px]">
+          <motion.div
+            key={activeCategory + "-custom"}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            className="max-w-6xl mx-auto"
+          >
+            <div className="bg-white dark:bg-card rounded-2xl p-6 border border-border/50 shadow-card flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div>
+                <p className="text-pink font-semibold text-base mb-1">
+                  {currentCategory.customBox.accent}
+                </p>
+                <p className="text-muted-foreground text-sm mb-2">
+                  {currentCategory.customBox.grey}
+                </p>
+                <p className="text-foreground text-sm font-medium">
+                  {currentCategory.customBox.black}
+                </p>
+              </div>
+              <div className="flex-shrink-0">
+                <Button variant="hero" size="default" asChild>
+                  <Link to="/contact">Custom Requirement</Link>
+                </Button>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Why SideQuesters */}
       <section className="py-16 px-6 lg:px-12 bg-muted/30">
         <div className="container mx-auto max-w-[1440px]">
@@ -361,7 +401,6 @@ const Services = () => {
                 We deliver quality work with complete transparency
               </p>
             </motion.div>
-
             <motion.div 
               className="grid sm:grid-cols-2 gap-4"
               variants={containerVariants}
@@ -397,9 +436,7 @@ const Services = () => {
             className="max-w-2xl mx-auto text-center"
           >
             <div className="bg-card rounded-3xl p-8 md:p-12 shadow-card relative overflow-hidden border border-border/50">
-              {/* Background glow */}
               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-64 bg-gradient-to-br from-pink/20 to-lavender/20 rounded-full blur-3xl pointer-events-none" />
-              
               <div className="relative">
                 <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
                   Not Sure What You Need?
@@ -436,39 +473,10 @@ const Services = () => {
             description: "Professional web development, SEO, digital marketing, and design services in India.",
             areaServed: "India",
             priceRange: "Custom Quotes",
-            hasOfferCatalog: {
-              "@type": "OfferCatalog",
-              name: "Digital Services",
-              itemListElement: [
-                {
-                  "@type": "Offer",
-                  itemOffered: {
-                    "@type": "Service",
-                    name: "Website Development",
-                    description: "Custom website design and development services",
-                  },
-                },
-                {
-                  "@type": "Offer",
-                  itemOffered: {
-                    "@type": "Service",
-                    name: "SEO Services",
-                    description: "Search engine optimization to improve rankings",
-                  },
-                },
-                {
-                  "@type": "Offer",
-                  itemOffered: {
-                    "@type": "Service",
-                    name: "Digital Marketing",
-                    description: "Paid ads, performance marketing, and growth strategies",
-                  },
-                },
-              ],
-            },
           }),
         }}
       />
+    <Footer />
     </div>
   );
 };
