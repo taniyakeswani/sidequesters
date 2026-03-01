@@ -39,7 +39,7 @@ const KB = [
     keys: ["mobile app", "android", "ios", "app development"],
     answer: "We build mobile applications:\n- Mobile App (Basic): single platform, core features.\n- Mobile App (Advanced): cross-platform, complex workflows.\n\nTimeline: 6-12 weeks depending on scope.",
     next: "Would you like to discuss your app requirements?",
-  },
+  }, 
   {
     keys: ["chatbot", "bot", "whatsapp", "automate", "workflow", "automation"],
     answer: "We build:\n- Website Chatbots: FAQ automation, lead capture.\n- WhatsApp Chatbots: automated flows, CRM integration.\n- Advanced Automation: workflow automation, third-party integrations.\n\nResults: up to 60% faster response time, 25% increase in lead capture.",
