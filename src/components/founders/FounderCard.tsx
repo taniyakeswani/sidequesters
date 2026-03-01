@@ -62,7 +62,6 @@ export default function FounderCard({
           src={founder.avatar}
           alt={founder.name}
           className="relative z-10 w-full h-full object-contain drop-shadow-lg"
-          loading="lazy"
           draggable={false}
         />
       </motion.div>
