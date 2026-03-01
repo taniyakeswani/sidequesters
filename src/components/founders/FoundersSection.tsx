@@ -29,7 +29,7 @@ const slots: SlotConfig[] = [
 export default function FoundersSection() {
   const sectionRef = useRef<HTMLElement | null>(null);
   const prefersReducedMotion = useReducedMotion();
-  const inView = useInView(sectionRef, { amount: 0.45, once: true });
+  const inView = useInView(sectionRef, { amount: 0.1, once: true });
   const [animationStarted, setAnimationStarted] = useState(false);
   const [motionSettled, setMotionSettled] = useState(false);
 
