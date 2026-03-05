@@ -3,13 +3,13 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 import logoImg from "@/assets/projects/phool-dastaan/phool_dastaan_logo.png";
-import businessCardImg from "@/assets/projects/phool-dastaan/phool_dastaan_buisness_card.jpeg";
-import brandColorImg from "@/assets/projects/phool-dastaan/brand_color_theme.png";
-import letterImg from "@/assets/projects/phool-dastaan/phool_dastaan_letter.png";
+import businessCardImg from "@/assets/projects/phool-dastaan/phool_dastaan_buisness_card.webp";
+import brandColorImg from "@/assets/projects/phool-dastaan/brand_color_theme.webp";
+import letterImg from "@/assets/projects/phool-dastaan/letter.webp";
 import catalogueImg from "@/assets/projects/phool-dastaan/catalogue.png";
-import webpage1Img from "@/assets/projects/phool-dastaan/webpage1.png";
-import webpage2Img from "@/assets/projects/phool-dastaan/webpage2.png";
-import webpage3Img from "@/assets/projects/phool-dastaan/webpage3.png";
+import webpage1Img from "@/assets/projects/phool-dastaan/webpage1.webp";
+import webpage2Img from "@/assets/projects/phool-dastaan/webpage2.webp";
+import webpage3Img from "@/assets/projects/phool-dastaan/webpage3.webp";
 
 interface WorkItem {
   images: string[];
