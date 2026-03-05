@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "@/components/ThemeToggle";
-import logoIcon from "@/assets/sidequester.png";
+import logoIcon from "@/assets/sidequester.webp"
 
 const navLinks = [
   { label: "Home", href: "/" },

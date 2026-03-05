@@ -321,6 +321,7 @@ const Chatbot = () => {
               </div>
             </div>
             <Button
+              aria-label="Close chat"
               variant="ghost"
               size="icon"
               onClick={() => setIsOpen(false)}
