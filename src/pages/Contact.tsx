@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Mail, MapPin, Clock, Linkedin, Instagram } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -26,6 +26,14 @@ const Contact = () => {
     customProjectType: "",
     message: "",
   });
+
+  useEffect(() => {
+    document.title = "Contact Us | SideQuesters - Get a Free Consultation";
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute("content", "Get in touch with SideQuesters for web development, SEO, branding, and digital marketing services. Free consultation available. Remote / India.");
+    }
+  }, []);
 
   const isCustom = formData.projectType === "custom-service";
 

@@ -148,7 +148,7 @@ const Work = () => {
     if (metaDescription) {
       metaDescription.setAttribute(
         "content",
-        "Below is a curated selection of our work. View our portfolio of design, development, and marketing projects."
+        "View SideQuesters portfolio — brand identity, website design, and digital projects. See how we help businesses build their digital presence."
       );
     }
     setTimeout(() => setIsVisible(true), 100);
